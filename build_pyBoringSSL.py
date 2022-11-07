@@ -15,6 +15,7 @@ ffibuilder = FFI()
 ffibuilder.set_source(
     "boringssl",
     """
+        #include <Python.h>
         #include "openssl/ssl.h" 
         #include "openssl/pool.h"
         #include "openssl/stack.h"
@@ -29,6 +30,8 @@ ffibuilder.set_source(
         #include "common/transform.h"
         
         int SetCompression(SSL_CTX *ctx);
+        PyObject *decode_certificate(X509 *certificate);
+        PyObject *getpeercert(SSL* ssl);
         
         
 struct asn1_object_st {
@@ -58,6 +61,7 @@ struct X509_extension_st {
         "boringssl/build/decrepit",
         "brotli/out",
         "cert_decompress",
+        "getpeercert",
     ],
     libraries=[
         "brotlicommon-static",
@@ -68,6 +72,7 @@ struct X509_extension_st {
         "decrepit",
 
         "cert_decompress",
+        "getpeercert",
     ],
     extra_compile_args=[])
 
@@ -103,6 +108,8 @@ ffibuilder.cdef("""
                                            unsigned *out_len);
     int SSL_connect(SSL *ssl);
     typedef ... BIO;
+    typedef ... BIO_METHOD;
+    const BIO_METHOD *BIO_s_mem(void);
     BIO *BIO_new_socket(int fd, int close_flag);
     void SSL_set_bio(SSL *ssl, BIO *rbio, BIO *wbio);
 
@@ -176,6 +183,12 @@ typedef struct asn1_string_st ASN1_OCTET_STRING;
     int X509V3_extensions_print(BIO *out, const char *title,
                                            const struct stack_st_X509_EXTENSION *exts,
                                            unsigned long flag, int indent);
+    void *X509_get_ext_d2i(const X509 *x509, int nid,
+                                      int *out_critical, int *out_idx);
+
+    typedef ... PyObject;
+    PyObject *decode_certificate(X509 *certificate);
+    PyObject *getpeercert(SSL* ssl);
 """)
 
 """

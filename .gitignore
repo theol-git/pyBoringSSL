@@ -1,3 +1,4 @@
 boringssl.c
 *.so
 *.o
+*.a
