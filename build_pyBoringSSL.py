@@ -15,7 +15,6 @@ ffibuilder = FFI()
 ffibuilder.set_source(
     "boringssl",
     """
-        #include <Python.h>
         #include "openssl/ssl.h" 
         #include "openssl/pool.h"
         #include "openssl/stack.h"
@@ -30,8 +29,7 @@ ffibuilder.set_source(
         #include "common/transform.h"
         
         int SetCompression(SSL_CTX *ctx);
-        PyObject *decode_certificate(X509 *certificate);
-        PyObject *getpeercert(SSL* ssl);
+        char* get_alt_names(X509 *certificate);
         
         
 struct asn1_object_st {
@@ -185,10 +183,7 @@ typedef struct asn1_string_st ASN1_OCTET_STRING;
                                            unsigned long flag, int indent);
     void *X509_get_ext_d2i(const X509 *x509, int nid,
                                       int *out_critical, int *out_idx);
-
-    typedef ... PyObject;
-    PyObject *decode_certificate(X509 *certificate);
-    PyObject *getpeercert(SSL* ssl);
+    char* get_alt_names(X509 *certificate);
 """)
 
 """
