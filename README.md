@@ -1,3 +1,7 @@
+## get submodule update:  
+git submodule init
+git submodule update
+
 
 ## Steps to build:  
 + build brotli and boringssl static lib:  
