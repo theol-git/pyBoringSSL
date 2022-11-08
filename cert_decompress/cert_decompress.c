@@ -25,7 +25,7 @@ int DecompressBrotliCert(SSL* ssl,
     printf("decompress failed.\n");
     return 0;
   }
-  printf("decompress success.\n");
+  // printf("decompress success.\n");
 
   *out = decompressed;
   return 1;

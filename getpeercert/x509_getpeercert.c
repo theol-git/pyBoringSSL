@@ -18,17 +18,24 @@ int buffer_add(char* buf, char **buf_point, int buf_size, char *add_string) {
 
     buf_used_num = *buf_point - buf;
     if (buf_used_num < 0) {
+        // printf("buf_used_num error.\n");
         return -1;
+    } else if (buf_used_num > 0) {
+        **buf_point = ';';
+        *buf_point += 1;
+        buf_used_num += 1;
     }
 
     left_size = buf_size - buf_used_num;
     add_string_len = strlen(add_string);
     if (left_size < add_string_len) {
+        printf("left_size %d, add_string_len:%d.\n", left_size, add_string_len);
         return -1;
     }
 
     memcpy(*buf_point, add_string, add_string_len);
     *buf_point += add_string_len;
+    // printf("buf: %p, p:point:%p\n", buf, buf_point);
     return add_string_len;
 }
 
@@ -82,8 +89,8 @@ char* get_alt_names(X509 *certificate) {
                 break;
             }
             tmp_name = (char *)ASN1_STRING_get0_data(as);
-            printf("uri: %s\n", tmp_name);
-            buffer_add(buf, &alt_name_p, alt_name_max_size, tmp_name);
+            // printf("uri: %s\n", tmp_name);
+            buffer_add(alt_names, &alt_name_p, alt_name_max_size, tmp_name);
             break;
 
         case GEN_RID:
@@ -114,9 +121,9 @@ char* get_alt_names(X509 *certificate) {
                 goto fail;
             }
 
-            printf("default: %s\n", buf);
+            // printf("default: %s\n", buf);
 
-            buffer_add(buf, &alt_name_p, alt_name_max_size, buf);
+            buffer_add(alt_names, &alt_name_p, alt_name_max_size, buf);
             break;
         }
 
