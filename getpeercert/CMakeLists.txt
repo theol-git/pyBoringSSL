@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.20)
+project(getpeercert)
+
+# set(CMAKE_CXX_STANDARD 14)
+
+add_library(getpeercert STATIC x509_getpeercert.c)
+
+find_package (Python3 COMPONENTS Interpreter Development)
+
+include_directories(../boringssl/include)
+include_directories(${Python3_INCLUDE_DIRS})
+
+# target_include_directories(getpeercert PRIVATE ${PYTHON_INCLUDE_DIRS})

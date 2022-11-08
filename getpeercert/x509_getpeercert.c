@@ -1,6 +1,6 @@
 
 #define PY_SSIZE_T_CLEAN
-#include <python3.10/Python.h>
+#include <Python.h>
 
 #include <string.h>
 
@@ -22,7 +22,7 @@ int buffer_add(char* buf, char **buf_point, int buf_size, char *add_string) {
     }
 
     left_size = buf_size - buf_used_num;
-    add_string_len = strlen(add_string_len);
+    add_string_len = strlen(add_string);
     if (left_size < add_string_len) {
         return -1;
     }
@@ -37,15 +37,18 @@ char* get_alt_names(X509 *certificate) {
     BIO *biobuf = NULL;
     GENERAL_NAMES *names = NULL;
     GENERAL_NAME *name;
+
     char buf[2048];
     char *vptr;
     int len;
 
     char *tmp_name;
+    int alt_name_max_size;
     char *alt_names = NULL;
     char *alt_name_p;
 
-    alt_names = (char*)malloc(1024);
+    alt_name_max_size = 1024;
+    alt_names = (char*)malloc(alt_name_max_size);
     alt_name_p = alt_names;
 
     names = (GENERAL_NAMES *)X509_get_ext_d2i(certificate, NID_subject_alt_name, NULL, NULL);
@@ -80,7 +83,7 @@ char* get_alt_names(X509 *certificate) {
             }
             tmp_name = (char *)ASN1_STRING_get0_data(as);
             printf("uri: %s\n", tmp_name);
-            buffer_add
+            buffer_add(buf, &alt_name_p, alt_name_max_size, tmp_name);
             break;
 
         case GEN_RID:
@@ -112,6 +115,8 @@ char* get_alt_names(X509 *certificate) {
             }
 
             printf("default: %s\n", buf);
+
+            buffer_add(buf, &alt_name_p, alt_name_max_size, buf);
             break;
         }
 

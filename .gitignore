@@ -3,3 +3,6 @@ boringssl.c
 *.o
 *.a
 .idea
+cmake_install.cmake
+CMakeCache.txt
+Makefile
