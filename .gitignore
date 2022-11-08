@@ -2,3 +2,4 @@ boringssl.c
 *.so
 *.o
 *.a
+.idea
