@@ -54,12 +54,12 @@ struct X509_extension_st {
         join(root, "boringssl", "include"),
     ],
     library_dirs=[
-        "boringssl/build/ssl",
-        "boringssl/build/crypto",
-        "boringssl/build/decrepit",
-        "brotli/out",
-        "cert_decompress",
-        "getpeercert",
+        "build/boringssl/ssl",
+        "build/boringssl/crypto",
+        "build/boringssl/decrepit",
+        "build/brotli",
+        "build/cert_decompress",
+        "build/getpeercert",
     ],
     libraries=[
         "brotlicommon-static",
@@ -185,19 +185,6 @@ typedef struct asn1_string_st ASN1_OCTET_STRING;
                                       int *out_critical, int *out_idx);
     char* get_alt_names(X509 *certificate);
 """)
-
-"""
-
-struct asn1_string_st {
-    int length;
-    int type;
-    unsigned char *data;
-    long flags;
-};
-typedef int ASN1_BOOLEAN;
-
-
-"""
 
 if __name__ == "__main__":
     ffibuilder.compile(verbose=True)
