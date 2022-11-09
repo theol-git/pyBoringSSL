@@ -11,14 +11,11 @@ cmake_minimum_required(VERSION 3.18)
 
 project(pyBoringSSL)
 
-# To avoid Error C2220
+# To avoid Error C2220 in Windows.
 # https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2220?view=msvc-170
 if (MSVC)
-    # warning level 4 and all warnings as errors
-    add_compile_options(/W3 )
-else()
-    # lots of warnings and all warnings as errors
-    add_compile_options(-Wall -Wextra -pedantic -Werror)
+    # disable warnings as errors
+    add_compile_options(/W3)
 endif()
 
 add_subdirectory(boringssl)
