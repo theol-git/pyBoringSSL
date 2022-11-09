@@ -1,5 +1,6 @@
 import os
 from os.path import join
+import sys
 
 from cffi import FFI
 
@@ -7,6 +8,20 @@ root = os.path.dirname(os.path.abspath(__file__))
 
 
 ffibuilder = FFI()
+
+libraries = [
+        "brotlicommon-static",
+        "brotlidec-static",
+
+        'bssl',
+        'bcrypto',
+        "decrepit",
+
+        "cert_decompress",
+        "getpeercert",
+    ]
+if sys.platform == "win32":
+    libraries.append("advapi32")
 
 # set_source() gives the name of the python extension module to
 # produce, and some C source code as a string.  This C code needs
@@ -61,17 +76,7 @@ struct X509_extension_st {
         "build/cert_decompress",
         "build/getpeercert",
     ],
-    libraries=[
-        "brotlicommon-static",
-        "brotlidec-static",
-
-        'bssl',
-        'bcrypto',
-        "decrepit",
-
-        "cert_decompress",
-        "getpeercert",
-    ],
+    libraries=libraries,
     extra_compile_args=[])
 
 ffibuilder.cdef("""

@@ -1,12 +1,25 @@
 cmake_minimum_required(VERSION 3.18)
 
+
 # if CMAKE_BUILD_TYPE undefined, we set it to Release
-if(NOT CMAKE_BUILD_TYPE)
+# if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")
-endif()
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose Release or Debug" FORCE)
+    SET(CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE} CACHE STRING "" FORCE)
+# endif()
 
 
 project(pyBoringSSL)
+
+# To avoid Error C2220
+# https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2220?view=msvc-170
+if (MSVC)
+    # warning level 4 and all warnings as errors
+    add_compile_options(/W3 )
+else()
+    # lots of warnings and all warnings as errors
+    add_compile_options(-Wall -Wextra -pedantic -Werror)
+endif()
 
 add_subdirectory(boringssl)
 

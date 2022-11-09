@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 
 from distutils.sysconfig import get_python_lib
 import distutils.command.build as _build
@@ -9,6 +10,30 @@ from setuptools import setup
 
 def extend_build(package_name):
     class build(_build.build):
+
+        def rename_libs(self, _build_dir):
+            if sys.platform == "win32":
+                shutil.copy(os.path.join(_build_dir, "boringssl", "ssl", "Release", "ssl.lib"),
+                          os.path.join(_build_dir, "boringssl", "ssl", "bssl.lib"))
+                shutil.copy(os.path.join(_build_dir, "boringssl", "crypto", "Release", "crypto.lib"),
+                          os.path.join(_build_dir, "boringssl", "crypto", "bcrypto.lib"))
+                shutil.copy(os.path.join(_build_dir, "boringssl", "decrepit", "Release", "decrepit.lib"),
+                          os.path.join(_build_dir, "boringssl", "decrepit", "decrepit.lib"))
+
+                for fn in ["brotlicommon-static.lib", "brotlidec-static.lib"]:
+                    shutil.copy(os.path.join(_build_dir, "brotli", "Release", fn),
+                                os.path.join(_build_dir, "brotli", fn))
+
+                for module in ["cert_decompress", "getpeercert"]:
+                    shutil.copy(os.path.join(_build_dir, module, "Release", module + ".lib"),
+                                os.path.join(_build_dir, module, module + ".lib"))
+            else:
+                os.rename(os.path.join(_build_dir, "boringssl", "ssl", "libssl.a"),
+                          os.path.join(_build_dir, "boringssl", "ssl", "libbssl.a"))
+                os.rename(os.path.join(_build_dir, "boringssl", "crypto", "libcrypto.a"),
+                          os.path.join(_build_dir, "boringssl", "crypto", "libbcrypto.a"))
+
+
         def run(self):
             cwd = os.getcwd()
             if spawn.find_executable('cmake') is None:
@@ -25,11 +50,12 @@ def extend_build(package_name):
                              # '-DCMAKE_INSTALL_PREFIX={0}'.format(_prefix),
                              ])
                 spawn.spawn(['cmake',
-                             '--build', _build_dir, "-j",
+                             '--build', _build_dir, "-j", "--config", "Release",
                              # '--target', 'install'
                              ])
-                os.rename(os.path.join(_build_dir, "boringssl", "ssl", "libssl.a"), os.path.join(_build_dir, "boringssl", "ssl", "libbssl.a"))
-                os.rename(os.path.join(_build_dir, "boringssl", "crypto", "libcrypto.a"), os.path.join(_build_dir, "boringssl", "crypto", "libbcrypto.a"))
+
+                self.rename_libs(_build_dir)
+
                 os.chdir(cwd)
             except spawn.DistutilsExecError:
                 sys.stderr.write("Error while building with CMake\n")
