@@ -50,7 +50,7 @@ def extend_build(package_name):
                              # '-DCMAKE_INSTALL_PREFIX={0}'.format(_prefix),
                              ])
                 spawn.spawn(['cmake',
-                             '--build', _build_dir, "-j", "--config", "Release",
+                             '--build', _build_dir, "-j8", "--config", "Release",
                              # '--target', 'install'
                              ])
 

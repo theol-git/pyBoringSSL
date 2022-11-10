@@ -5,7 +5,10 @@ git submodule update
 
 ## Requirements:
   Android:
-    apt install build-essential golang
+    pkg update
+    pkg install git python build-essential golang
+    pip install cffi
+    
 
   Windows: 
     Python 3.10 ( or other version you want to build for)
