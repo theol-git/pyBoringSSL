@@ -13,26 +13,30 @@ def extend_build(package_name):
 
         def rename_libs(self, _build_dir):
             if sys.platform == "win32":
-                shutil.copy(os.path.join(_build_dir, "boringssl", "ssl", "Release", "ssl.lib"),
+                if self.debug:
+                    build_mode = "Debug"
+                else:
+                    build_mode = "Release"
+
+                shutil.copy(os.path.join(_build_dir, "boringssl", "ssl", build_mode, "ssl.lib"),
                           os.path.join(_build_dir, "boringssl", "ssl", "bssl.lib"))
-                shutil.copy(os.path.join(_build_dir, "boringssl", "crypto", "Release", "crypto.lib"),
+                shutil.copy(os.path.join(_build_dir, "boringssl", "crypto", build_mode, "crypto.lib"),
                           os.path.join(_build_dir, "boringssl", "crypto", "bcrypto.lib"))
-                shutil.copy(os.path.join(_build_dir, "boringssl", "decrepit", "Release", "decrepit.lib"),
+                shutil.copy(os.path.join(_build_dir, "boringssl", "decrepit", build_mode, "decrepit.lib"),
                           os.path.join(_build_dir, "boringssl", "decrepit", "decrepit.lib"))
 
                 for fn in ["brotlicommon-static.lib", "brotlidec-static.lib"]:
-                    shutil.copy(os.path.join(_build_dir, "brotli", "Release", fn),
+                    shutil.copy(os.path.join(_build_dir, "brotli", build_mode, fn),
                                 os.path.join(_build_dir, "brotli", fn))
 
                 for module in ["cert_decompress", "getpeercert"]:
-                    shutil.copy(os.path.join(_build_dir, module, "Release", module + ".lib"),
+                    shutil.copy(os.path.join(_build_dir, module, build_mode, module + ".lib"),
                                 os.path.join(_build_dir, module, module + ".lib"))
             else:
                 os.rename(os.path.join(_build_dir, "boringssl", "ssl", "libssl.a"),
                           os.path.join(_build_dir, "boringssl", "ssl", "libbssl.a"))
                 os.rename(os.path.join(_build_dir, "boringssl", "crypto", "libcrypto.a"),
                           os.path.join(_build_dir, "boringssl", "crypto", "libbcrypto.a"))
-
 
         def run(self):
             cwd = os.getcwd()
@@ -44,15 +48,23 @@ def extend_build(package_name):
             _build_dir = os.path.join(_source_dir, 'build')
             _prefix = os.path.join(get_python_lib(), package_name)
             try:
-                spawn.spawn(['cmake',
+                cmd = ['cmake',
                              '-H{0}'.format(_source_dir),
-                             '-B{0}'.format(_build_dir),
-                             # '-DCMAKE_INSTALL_PREFIX={0}'.format(_prefix),
-                             ])
-                spawn.spawn(['cmake',
-                             '--build', _build_dir, "-j8", "--config", "Release",
+                             '-B{0}'.format(_build_dir)
+                       ]
+                if self.debug:
+                    cmd.append('-DCMAKE_BUILD_TYPE=Debug')
+                spawn.spawn(cmd)
+
+                cmd = ['cmake',
+                             '--build', _build_dir, "-j8",
                              # '--target', 'install'
-                             ])
+                             ]
+                if self.debug:
+                    cmd += ["--config", "Debug",]
+                else:
+                    cmd += ["--config", "Release",]
+                spawn.spawn(cmd)
 
                 self.rename_libs(_build_dir)
 

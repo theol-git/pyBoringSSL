@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.18)
 
 
 # if CMAKE_BUILD_TYPE undefined, we set it to Release
-# if(NOT CMAKE_BUILD_TYPE)
+if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose Release or Debug" FORCE)
     SET(CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE} CACHE STRING "" FORCE)
-# endif()
+endif()
 
 
 project(pyBoringSSL)

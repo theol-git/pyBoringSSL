@@ -2,10 +2,6 @@
 #include "openssl/ssl.h"
 #include "brotli/decode.h"
 
-int CompressBrotliCert(SSL *ssl, CBB *out, const uint8_t *in, size_t in_len){
-    return 0;
-}
-
 
 int DecompressBrotliCert(SSL* ssl,
                          CRYPTO_BUFFER** out,
@@ -32,5 +28,5 @@ int DecompressBrotliCert(SSL* ssl,
 }
 
 int SetCompression(SSL_CTX *ctx) {
-    return SSL_CTX_add_cert_compression_alg(ctx, 2, &CompressBrotliCert, &DecompressBrotliCert);
+    return SSL_CTX_add_cert_compression_alg(ctx, 2, 0, &DecompressBrotliCert);
 }

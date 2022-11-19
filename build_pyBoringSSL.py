@@ -80,6 +80,8 @@ struct X509_extension_st {
     extra_compile_args=[])
 
 ffibuilder.cdef("""
+    void free(void *ptr);
+
     typedef ... SSL_METHOD;
     const SSL_METHOD *TLS_method(void);
     typedef ... SSL_CTX;

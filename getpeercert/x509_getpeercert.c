@@ -9,7 +9,6 @@
 #include "openssl/x509.h"
 #include "openssl/x509v3.h"
 
-#define X509_NAME_MAXLEN 256
 
 int buffer_add(char* buf, char **buf_point, int buf_size, char *add_string) {
     int buf_used_num;
@@ -20,23 +19,25 @@ int buffer_add(char* buf, char **buf_point, int buf_size, char *add_string) {
     if (buf_used_num < 0) {
         // printf("buf_used_num error.\n");
         return -1;
-    } else if (buf_used_num > 0) {
+    }
+
+    left_size = buf_size - buf_used_num;
+    add_string_len = strlen(add_string);
+    if (left_size - 2 < add_string_len) {
+        printf("left_size %d, add_string_len:%d.\n", left_size, add_string_len);
+        return -1;
+    }
+
+    if (buf_used_num > 0) {
         **buf_point = ';';
         *buf_point += 1;
         buf_used_num += 1;
     }
 
-    left_size = buf_size - buf_used_num;
-    add_string_len = strlen(add_string);
-    if (left_size < add_string_len) {
-        printf("left_size %d, add_string_len:%d.\n", left_size, add_string_len);
-        return -1;
-    }
-
     memcpy(*buf_point, add_string, add_string_len);
     *buf_point += add_string_len;
     // printf("buf: %p, p:point:%p\n", buf, buf_point);
-    return add_string_len;
+    return 1;
 }
 
 char* get_alt_names(X509 *certificate) {
@@ -54,8 +55,16 @@ char* get_alt_names(X509 *certificate) {
     char *alt_names = NULL;
     char *alt_name_p;
 
+    if (!certificate) {
+        return NULL;
+    }
+
     alt_name_max_size = 1024;
     alt_names = (char*)malloc(alt_name_max_size);
+    if (!alt_names) {
+        // malloc failed
+        return alt_names;
+    }
     alt_name_p = alt_names;
 
     names = (GENERAL_NAMES *)X509_get_ext_d2i(certificate, NID_subject_alt_name, NULL, NULL);
