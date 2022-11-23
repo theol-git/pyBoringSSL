@@ -1,37 +1,38 @@
-## get submodule update:  
-git submodule init
-git submodule update
+## get submodule update:    
+    git submodule init  
+    git submodule update  
 
 
 ## Requirements:
-  Android:
-    pkg update
-    pkg install git python build-essential golang
-    pip install cffi
+  ### Android:  
+    pkg update  
+    pkg install git python build-essential golang  
+    pip install cffi   
     
 
-  Windows: 
-    Python 3.10 ( or other version you want to build for)
-    Virtual Studio (2019 communication version is good)
-    golang (download and install)
-    perl (strawberry-perl is good)
+  ### Windows:
+* Python 3.10 ( or other version you want to build for)    
+* Virtual Studio (communication version is good enough)  
+* golang (download and install)  
+* perl (strawberry-perl is good)  
 
 
 ## Steps to build and install:  
-  python setup.py build install
+    python setup.py build install
   
-## Where to get the output lib file:
-  build/lib.$os-$arch-$python-version/boring....
+## Where to get the output lib file:  
+    build/lib.$os-$arch-cpython-$version/boring....  
   
-  Windows:
-    build/lib.win-amd64-cpython-310/boringssl.pyd
+  ### Windows:  
+    build/lib.win-$arch-cpython-$version/boringssl.pyd  
+  To build win32-x86, use python x86 to build, will generate library for x86.
   
-  Mac:
-    build/lib.macosx-10.9-x86_64-cpython-310/boringssl.abi3.so
+  ### Mac:
+    build/lib.macosx-10.9-x86_64-cpython-$version/boringssl.abi3.so
   
-  Android:
-    build/lib.linux-aarch64-cpython-310/boringssl.abi3.so
+  ### Android:
+    build/lib.linux-aarch64-cpython-$version/boringssl.abi3.so
   
-  Linux:
-    build/lib.linux-x86_64-3.9/boringssl.abi3.so
+  ### Linux:
+    build/lib.linux-x86_64-$version/boringssl.abi3.so
   
