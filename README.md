@@ -19,13 +19,13 @@
 
 ## Steps to build and install:  
     python setup.py build install
+  You can use x86 python to generate library for x86.
   
 ## Where to get the output lib file:  
     build/lib.$os-$arch-cpython-$version/boring....  
   
   ### Windows:  
     build/lib.win-$arch-cpython-$version/boringssl.pyd  
-  To build win32-x86, use python x86 to build, will generate library for x86.
   
   ### Mac:
     build/lib.macosx-10.9-x86_64-cpython-$version/boringssl.abi3.so
