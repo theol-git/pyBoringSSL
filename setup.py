@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import platform
 
 from distutils.sysconfig import get_python_lib
 import distutils.command.build as _build
@@ -54,12 +55,16 @@ def extend_build(package_name):
                        ]
                 if self.debug:
                     cmd.append('-DCMAKE_BUILD_TYPE=Debug')
+
+                if platform.architecture()[0] == "32bit":
+                    if sys.platform == "win32":
+                        cmd += ["-A", "Win32"]
+                    else:
+                        cmd += ["-DCMAKE_GENERATOR_PLATFORM=x86", ]
+
                 spawn.spawn(cmd)
 
-                cmd = ['cmake',
-                             '--build', _build_dir, "-j8",
-                             # '--target', 'install'
-                             ]
+                cmd = ['cmake', '--build', _build_dir, "-j8", ]
                 if self.debug:
                     cmd += ["--config", "Debug",]
                 else:
