@@ -25,3 +25,5 @@ add_subdirectory(brotli)
 add_subdirectory(cert_decompress)
 
 add_subdirectory(getpeercert)
+
+add_subdirectory(cffi_boringssl)

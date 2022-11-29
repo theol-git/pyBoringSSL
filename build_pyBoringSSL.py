@@ -194,4 +194,7 @@ typedef struct asn1_string_st ASN1_OCTET_STRING;
 """)
 
 if __name__ == "__main__":
-    ffibuilder.compile(verbose=True)
+    if len(sys.argv) == 2 and sys.argv[1] == "generate_only":
+        ffibuilder.emit_c_code("cffi_boringssl/boringssl.c")
+    else:
+        ffibuilder.compile(verbose=True)
