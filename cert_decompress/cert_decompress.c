@@ -1,4 +1,7 @@
 
+#define BORINGSSL_PREFIX BSSL
+#include "boringssl_prefix_symbols.h"
+
 #include "openssl/ssl.h"
 #include "brotli/decode.h"
 

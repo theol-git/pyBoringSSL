@@ -4,6 +4,9 @@
 
 #include <string.h>
 
+#define BORINGSSL_PREFIX BSSL
+#include "boringssl_prefix_symbols.h"
+
 #include "openssl/ssl.h"
 #include "openssl/bio.h"
 #include "openssl/x509.h"
@@ -142,4 +145,9 @@ char* get_alt_names(X509 *certificate) {
     fail:
         *alt_name_p = 0x0;
         return alt_names;
+}
+
+
+int test_add_int(int a, int b){
+    return a + b;
 }

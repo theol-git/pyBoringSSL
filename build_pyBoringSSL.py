@@ -30,6 +30,10 @@ if sys.platform == "win32":
 ffibuilder.set_source(
     "boringssl",
     """
+    
+        #define BORINGSSL_PREFIX BSSL
+        #include "boringssl_prefix_symbols.h"
+        
         #include "openssl/ssl.h" 
         #include "openssl/pool.h"
         #include "openssl/stack.h"
@@ -45,7 +49,7 @@ ffibuilder.set_source(
         
         int SetCompression(SSL_CTX *ctx);
         char* get_alt_names(X509 *certificate);
-        
+        int test_add_int(int a, int b);
         
 struct asn1_object_st {
   char *sn;
@@ -67,6 +71,7 @@ struct X509_extension_st {
         join(root, "brotli", "c"),
         join(root, "brotli", "c", "include"),
         join(root, "boringssl", "include"),
+        join(root, "build", "boringssl", "symbol_prefix_include"),
     ],
     library_dirs=[
         "build/boringssl/ssl",
@@ -83,62 +88,62 @@ ffibuilder.cdef("""
     void free(void *ptr);
 
     typedef ... SSL_METHOD;
-    const SSL_METHOD *TLS_method(void);
+    const SSL_METHOD *BSSL_TLS_method(void);
     typedef ... SSL_CTX;
-    SSL_CTX * SSL_CTX_new(const SSL_METHOD * method);
+    SSL_CTX * BSSL_SSL_CTX_new(const SSL_METHOD * method);
 
-    void SSL_CTX_set_grease_enabled(SSL_CTX *ctx, int enabled);
-    int SSL_CTX_set_cipher_list(SSL_CTX *ctx, const char *str);
-    int SSL_CTX_set_alpn_protos(SSL_CTX *ssl, const uint8_t *protos, unsigned protos_len);
-    void SSL_CTX_enable_ocsp_stapling(SSL_CTX *ctx);
-    void SSL_CTX_enable_signed_cert_timestamps(SSL_CTX *ctx);
-    int SSL_CTX_set_verify_algorithm_prefs(SSL_CTX *ctx,
+    void BSSL_SSL_CTX_set_grease_enabled(SSL_CTX *ctx, int enabled);
+    int BSSL_SSL_CTX_set_cipher_list(SSL_CTX *ctx, const char *str);
+    int BSSL_SSL_CTX_set_alpn_protos(SSL_CTX *ssl, const uint8_t *protos, unsigned protos_len);
+    void BSSL_SSL_CTX_enable_ocsp_stapling(SSL_CTX *ctx);
+    void BSSL_SSL_CTX_enable_signed_cert_timestamps(SSL_CTX *ctx);
+    int BSSL_SSL_CTX_set_verify_algorithm_prefs(SSL_CTX *ctx,
                                                       const uint16_t *prefs,
                                                       size_t num_prefs);
-    int SSL_CTX_set_min_proto_version(SSL_CTX *ctx, uint16_t version);
+    int BSSL_SSL_CTX_set_min_proto_version(SSL_CTX *ctx, uint16_t version);
 
     typedef ... SSL;
-    int SSL_get_error(const SSL *ssl, int ret_code);
-    SSL *SSL_new(SSL_CTX *ctx);
-    int SSL_do_handshake(SSL *ssl);
+    int BSSL_SSL_get_error(const SSL *ssl, int ret_code);
+    SSL *BSSL_SSL_new(SSL_CTX *ctx);
+    int BSSL_SSL_do_handshake(SSL *ssl);
 
-    int SSL_set_tlsext_host_name(SSL *ssl, const char *name);
+    int BSSL_SSL_set_tlsext_host_name(SSL *ssl, const char *name);
 
-    int SSL_add_application_settings(SSL *ssl, const uint8_t *proto,
+    int BSSL_SSL_add_application_settings(SSL *ssl, const uint8_t *proto,
                                                 size_t proto_len,
                                                 const uint8_t *settings,
                                                 size_t settings_len);
-    void SSL_get0_alpn_selected(const SSL *ssl,
+    void BSSL_SSL_get0_alpn_selected(const SSL *ssl,
                                            const uint8_t **out_data,
                                            unsigned *out_len);
-    int SSL_connect(SSL *ssl);
+    int BSSL_SSL_connect(SSL *ssl);
     typedef ... BIO;
     typedef ... BIO_METHOD;
-    const BIO_METHOD *BIO_s_mem(void);
-    BIO *BIO_new_socket(int fd, int close_flag);
-    void SSL_set_bio(SSL *ssl, BIO *rbio, BIO *wbio);
+    const BIO_METHOD *BSSL_BIO_s_mem(void);
+    BIO *BSSL_BIO_new_socket(int fd, int close_flag);
+    void BSSL_SSL_set_bio(SSL *ssl, BIO *rbio, BIO *wbio);
 
-    int SSL_write(SSL *ssl, const void *buf, int num);
-    int SSL_read(SSL *ssl, void *buf, int num);
-    int SSL_shutdown(SSL *ssl);
-    void SSL_free(SSL *ssl);
+    int BSSL_SSL_write(SSL *ssl, const void *buf, int num);
+    int BSSL_SSL_read(SSL *ssl, void *buf, int num);
+    int BSSL_SSL_shutdown(SSL *ssl);
+    void BSSL_SSL_free(SSL *ssl);
     
     typedef ... X509;
-    X509 *SSL_get_peer_certificate(const SSL *ssl);
-    struct stack_st_X509 *SSL_get_peer_cert_chain(const SSL *ssl);
-    struct stack_st_X509 *SSL_get_peer_full_cert_chain(const SSL *ssl);
+    X509 *BSSL_SSL_get_peer_certificate(const SSL *ssl);
+    struct stack_st_X509 *BSSL_SSL_get_peer_cert_chain(const SSL *ssl);
+    struct stack_st_X509 *BSSL_SSL_get_peer_full_cert_chain(const SSL *ssl);
     
     typedef ... X509_NAME;
-    X509_NAME *X509_get_issuer_name(const X509 *x509);
-    X509_NAME *X509_get_subject_name(const X509 *x509);
-    char *X509_NAME_oneline(const X509_NAME *a, char *buf, int size);
+    X509_NAME *BSSL_X509_get_issuer_name(const X509 *x509);
+    X509_NAME *BSSL_X509_get_subject_name(const X509 *x509);
+    char *BSSL_X509_NAME_oneline(const X509_NAME *a, char *buf, int size);
 
 typedef struct X509_extension_st X509_EXTENSION;
-X509_EXTENSION *X509_get_ext(const X509 *x, int loc);
+X509_EXTENSION *BSSL_X509_get_ext(const X509 *x, int loc);
 
-    typedef ... CBB;
+    //typedef ... BSSL_CBB;
     typedef ... CRYPTO_BUFFER;
-    CRYPTO_BUFFER *CRYPTO_BUFFER_alloc(uint8_t **out_data, size_t len);
+    CRYPTO_BUFFER *BSSL_CRYPTO_BUFFER_alloc(uint8_t **out_data, size_t len);
     
     #define BROTLI_NUM_BLOCK_LEN_SYMBOLS 26
     
@@ -148,8 +153,8 @@ X509_EXTENSION *X509_get_ext(const X509 *x, int loc);
     } BrotliPrefixCodeRange;
     
                      
-typedef struct asn1_object_st ASN1_OBJECT;
-typedef struct asn1_string_st ASN1_OCTET_STRING;
+typedef struct asn1_object_st BSSL_ASN1_OBJECT;
+typedef struct asn1_string_st BSSL_ASN1_OCTET_STRING;
 
     /* "Soft-private", it is exported, but not "advertised" as API. */
     extern const BrotliPrefixCodeRange _kBrotliPrefixCodeRanges[BROTLI_NUM_BLOCK_LEN_SYMBOLS];
@@ -185,12 +190,14 @@ typedef struct asn1_string_st ASN1_OCTET_STRING;
     int SetCompression(SSL_CTX *ctx);             
     
     //typedef ... stack_st_X509_EXTENSION;
-    int X509V3_extensions_print(BIO *out, const char *title,
+    int BSSL_X509V3_extensions_print(BIO *out, const char *title,
                                            const struct stack_st_X509_EXTENSION *exts,
                                            unsigned long flag, int indent);
-    void *X509_get_ext_d2i(const X509 *x509, int nid,
+    void *BSSL_X509_get_ext_d2i(const X509 *x509, int nid,
                                       int *out_critical, int *out_idx);
     char* get_alt_names(X509 *certificate);
+    
+    int test_add_int(int a, int b);
 """)
 
 if __name__ == "__main__":

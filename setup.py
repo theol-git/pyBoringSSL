@@ -48,11 +48,16 @@ def extend_build(package_name):
             _source_dir = os.path.split(__file__)[0]
             _build_dir = os.path.join(_source_dir, 'build')
             _prefix = os.path.join(get_python_lib(), package_name)
+            current_path = os.path.dirname(os.path.abspath(__file__))
+            symbols_fp = os.path.join(current_path, "boringssl_symbols.txt")
             try:
-                cmd = ['cmake',
-                             '-H{0}'.format(_source_dir),
-                             '-B{0}'.format(_build_dir)
-                       ]
+                cmd = [
+                    'cmake',
+                    '-H{0}'.format(_source_dir),
+                    '-B{0}'.format(_build_dir),
+                    '-DBORINGSSL_PREFIX=BSSL',
+                    "-DBORINGSSL_PREFIX_SYMBOLS=" + symbols_fp,
+                   ]
                 if self.debug:
                     cmd.append('-DCMAKE_BUILD_TYPE=Debug')
 
@@ -64,7 +69,7 @@ def extend_build(package_name):
 
                 spawn.spawn(cmd)
 
-                cmd = ['cmake', '--build', _build_dir, "-j8", ]
+                cmd = ['cmake', '--build', _build_dir, "-j8", "-v"]
                 if self.debug:
                     cmd += ["--config", "Debug",]
                 else:

@@ -7,3 +7,4 @@ add_library(cert_decompress STATIC cert_decompress.c)
 
 include_directories(../boringssl/include)
 include_directories(../brotli/c/include)
+include_directories(${CMAKE_BINARY_DIR}/boringssl/symbol_prefix_include)
