@@ -91,6 +91,7 @@ ffibuilder.cdef("""
     const SSL_METHOD *BSSL_TLS_method(void);
     typedef ... SSL_CTX;
     SSL_CTX * BSSL_SSL_CTX_new(const SSL_METHOD * method);
+    void BSSL_SSL_CTX_free(SSL_CTX *ctx);
 
     void BSSL_SSL_CTX_set_grease_enabled(SSL_CTX *ctx, int enabled);
     int BSSL_SSL_CTX_set_cipher_list(SSL_CTX *ctx, const char *str);
@@ -117,12 +118,18 @@ ffibuilder.cdef("""
                                            const uint8_t **out_data,
                                            unsigned *out_len);
     int BSSL_SSL_connect(SSL *ssl);
+    int BSSL_SSL_accept(SSL *ssl);
+    int BSSL_SSL_get_fd(const SSL *ssl);
     typedef ... BIO;
     typedef ... BIO_METHOD;
     const BIO_METHOD *BSSL_BIO_s_mem(void);
     BIO *BSSL_BIO_new_socket(int fd, int close_flag);
+    int BSSL_BIO_free(BIO *bio);
     void BSSL_SSL_set_bio(SSL *ssl, BIO *rbio, BIO *wbio);
 
+    int BSSL_SSL_pending(const SSL *ssl);
+    int BSSL_SSL_has_pending(const SSL *ssl);
+    int BSSL_SSL_peek(SSL *ssl, void *buf, int num);
     int BSSL_SSL_write(SSL *ssl, const void *buf, int num);
     int BSSL_SSL_read(SSL *ssl, void *buf, int num);
     int BSSL_SSL_shutdown(SSL *ssl);
@@ -141,7 +148,6 @@ ffibuilder.cdef("""
 typedef struct X509_extension_st X509_EXTENSION;
 X509_EXTENSION *BSSL_X509_get_ext(const X509 *x, int loc);
 
-    //typedef ... BSSL_CBB;
     typedef ... CRYPTO_BUFFER;
     CRYPTO_BUFFER *BSSL_CRYPTO_BUFFER_alloc(uint8_t **out_data, size_t len);
     
@@ -189,7 +195,6 @@ typedef struct asn1_string_st BSSL_ASN1_OCTET_STRING;
         
     int SetCompression(SSL_CTX *ctx);             
     
-    //typedef ... stack_st_X509_EXTENSION;
     int BSSL_X509V3_extensions_print(BIO *out, const char *title,
                                            const struct stack_st_X509_EXTENSION *exts,
                                            unsigned long flag, int indent);
