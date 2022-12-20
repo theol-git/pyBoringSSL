@@ -40,6 +40,7 @@ ffibuilder.set_source(
         #include "openssl/x509.h"
         #include "openssl/x509v3.h"
         #include "openssl/asn1.h"
+        #include "openssl/err.h"
         
         #include "brotli/decode.h"
         #include "common/constants.h"
@@ -105,6 +106,8 @@ ffibuilder.cdef("""
 
     typedef ... SSL;
     int BSSL_SSL_get_error(const SSL *ssl, int ret_code);
+    uint32_t BSSL_ERR_get_error(void);
+    uint32_t BSSL_ERR_get_error_line(const char **file, int *line);
     SSL *BSSL_SSL_new(SSL_CTX *ctx);
     int BSSL_SSL_do_handshake(SSL *ssl);
 

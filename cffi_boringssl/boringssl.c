@@ -577,6 +577,7 @@ static void (*_cffi_call_python_org)(struct _cffi_externpy_s *, char *);
         #include "openssl/x509.h"
         #include "openssl/x509v3.h"
         #include "openssl/asn1.h"
+        #include "openssl/err.h"
         
         #include "brotli/decode.h"
         #include "common/constants.h"
@@ -612,182 +613,192 @@ static void *_cffi_types[] = {
 /*  1 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7), // int
 /*  2 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
 /*  3 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/*  4 */ _CFFI_OP(_CFFI_OP_FUNCTION, 152), // BIO_METHOD const *()(void)
+/*  4 */ _CFFI_OP(_CFFI_OP_FUNCTION, 161), // BIO_METHOD const *()(void)
 /*  5 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/*  6 */ _CFFI_OP(_CFFI_OP_FUNCTION, 156), // BrotliDecoderResult()(size_t, uint8_t const *, size_t *, uint8_t *)
+/*  6 */ _CFFI_OP(_CFFI_OP_FUNCTION, 165), // BrotliDecoderResult()(size_t, uint8_t const *, size_t *, uint8_t *)
 /*  7 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28), // size_t
-/*  8 */ _CFFI_OP(_CFFI_OP_POINTER, 176), // uint8_t const *
+/*  8 */ _CFFI_OP(_CFFI_OP_POINTER, 186), // uint8_t const *
 /*  9 */ _CFFI_OP(_CFFI_OP_POINTER, 7), // size_t *
-/* 10 */ _CFFI_OP(_CFFI_OP_POINTER, 176), // uint8_t *
+/* 10 */ _CFFI_OP(_CFFI_OP_POINTER, 186), // uint8_t *
 /* 11 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 12 */ _CFFI_OP(_CFFI_OP_FUNCTION, 162), // CRYPTO_BUFFER *()(uint8_t * *, size_t)
+/* 12 */ _CFFI_OP(_CFFI_OP_FUNCTION, 171), // CRYPTO_BUFFER *()(uint8_t * *, size_t)
 /* 13 */ _CFFI_OP(_CFFI_OP_POINTER, 10), // uint8_t * *
 /* 14 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
 /* 15 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 16 */ _CFFI_OP(_CFFI_OP_FUNCTION, 50), // SSL *()(SSL_CTX *)
-/* 17 */ _CFFI_OP(_CFFI_OP_POINTER, 165), // SSL_CTX *
+/* 16 */ _CFFI_OP(_CFFI_OP_FUNCTION, 53), // SSL *()(SSL_CTX *)
+/* 17 */ _CFFI_OP(_CFFI_OP_POINTER, 174), // SSL_CTX *
 /* 18 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
 /* 19 */ _CFFI_OP(_CFFI_OP_FUNCTION, 17), // SSL_CTX *()(SSL_METHOD const *)
-/* 20 */ _CFFI_OP(_CFFI_OP_POINTER, 166), // SSL_METHOD const *
+/* 20 */ _CFFI_OP(_CFFI_OP_POINTER, 175), // SSL_METHOD const *
 /* 21 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
 /* 22 */ _CFFI_OP(_CFFI_OP_FUNCTION, 20), // SSL_METHOD const *()(void)
 /* 23 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
 /* 24 */ _CFFI_OP(_CFFI_OP_FUNCTION, 35), // X509 *()(SSL const *)
-/* 25 */ _CFFI_OP(_CFFI_OP_POINTER, 164), // SSL const *
+/* 25 */ _CFFI_OP(_CFFI_OP_POINTER, 173), // SSL const *
 /* 26 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 27 */ _CFFI_OP(_CFFI_OP_FUNCTION, 168), // X509_EXTENSION *()(X509 const *, int)
-/* 28 */ _CFFI_OP(_CFFI_OP_POINTER, 167), // X509 const *
+/* 27 */ _CFFI_OP(_CFFI_OP_FUNCTION, 177), // X509_EXTENSION *()(X509 const *, int)
+/* 28 */ _CFFI_OP(_CFFI_OP_POINTER, 176), // X509 const *
 /* 29 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
 /* 30 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 31 */ _CFFI_OP(_CFFI_OP_FUNCTION, 170), // X509_NAME *()(X509 const *)
+/* 31 */ _CFFI_OP(_CFFI_OP_FUNCTION, 179), // X509_NAME *()(X509 const *)
 /* 32 */ _CFFI_OP(_CFFI_OP_NOOP, 28),
 /* 33 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
 /* 34 */ _CFFI_OP(_CFFI_OP_FUNCTION, 39), // char *()(X509 *)
-/* 35 */ _CFFI_OP(_CFFI_OP_POINTER, 167), // X509 *
+/* 35 */ _CFFI_OP(_CFFI_OP_POINTER, 176), // X509 *
 /* 36 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
 /* 37 */ _CFFI_OP(_CFFI_OP_FUNCTION, 39), // char *()(X509_NAME const *, char *, int)
-/* 38 */ _CFFI_OP(_CFFI_OP_POINTER, 171), // X509_NAME const *
-/* 39 */ _CFFI_OP(_CFFI_OP_POINTER, 172), // char *
+/* 38 */ _CFFI_OP(_CFFI_OP_POINTER, 180), // X509_NAME const *
+/* 39 */ _CFFI_OP(_CFFI_OP_POINTER, 181), // char *
 /* 40 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
 /* 41 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 42 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(BIO *, char const *, struct stack_st_X509_EXTENSION const *, unsigned long, int)
-/* 43 */ _CFFI_OP(_CFFI_OP_POINTER, 151), // BIO *
-/* 44 */ _CFFI_OP(_CFFI_OP_POINTER, 172), // char const *
-/* 45 */ _CFFI_OP(_CFFI_OP_POINTER, 175), // struct stack_st_X509_EXTENSION const *
-/* 46 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 10), // unsigned long
-/* 47 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 48 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 49 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *)
-/* 50 */ _CFFI_OP(_CFFI_OP_POINTER, 164), // SSL *
+/* 42 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(BIO *)
+/* 43 */ _CFFI_OP(_CFFI_OP_POINTER, 160), // BIO *
+/* 44 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 45 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(BIO *, char const *, struct stack_st_X509_EXTENSION const *, unsigned long, int)
+/* 46 */ _CFFI_OP(_CFFI_OP_NOOP, 43),
+/* 47 */ _CFFI_OP(_CFFI_OP_POINTER, 181), // char const *
+/* 48 */ _CFFI_OP(_CFFI_OP_POINTER, 184), // struct stack_st_X509_EXTENSION const *
+/* 49 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 10), // unsigned long
+/* 50 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
 /* 51 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 52 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *, char const *)
-/* 53 */ _CFFI_OP(_CFFI_OP_NOOP, 50),
-/* 54 */ _CFFI_OP(_CFFI_OP_NOOP, 44),
-/* 55 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 56 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *, uint8_t const *, size_t, uint8_t const *, size_t)
-/* 57 */ _CFFI_OP(_CFFI_OP_NOOP, 50),
-/* 58 */ _CFFI_OP(_CFFI_OP_NOOP, 8),
-/* 59 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
-/* 60 */ _CFFI_OP(_CFFI_OP_NOOP, 8),
-/* 61 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
-/* 62 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 63 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *, void *, int)
-/* 64 */ _CFFI_OP(_CFFI_OP_NOOP, 50),
-/* 65 */ _CFFI_OP(_CFFI_OP_POINTER, 179), // void *
-/* 66 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 67 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 68 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *, void const *, int)
-/* 69 */ _CFFI_OP(_CFFI_OP_NOOP, 50),
-/* 70 */ _CFFI_OP(_CFFI_OP_POINTER, 179), // void const *
-/* 71 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 72 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 73 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL const *)
-/* 74 */ _CFFI_OP(_CFFI_OP_NOOP, 25),
+/* 52 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *)
+/* 53 */ _CFFI_OP(_CFFI_OP_POINTER, 173), // SSL *
+/* 54 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 55 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *, char const *)
+/* 56 */ _CFFI_OP(_CFFI_OP_NOOP, 53),
+/* 57 */ _CFFI_OP(_CFFI_OP_NOOP, 47),
+/* 58 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 59 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *, uint8_t const *, size_t, uint8_t const *, size_t)
+/* 60 */ _CFFI_OP(_CFFI_OP_NOOP, 53),
+/* 61 */ _CFFI_OP(_CFFI_OP_NOOP, 8),
+/* 62 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
+/* 63 */ _CFFI_OP(_CFFI_OP_NOOP, 8),
+/* 64 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
+/* 65 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 66 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *, void *, int)
+/* 67 */ _CFFI_OP(_CFFI_OP_NOOP, 53),
+/* 68 */ _CFFI_OP(_CFFI_OP_POINTER, 189), // void *
+/* 69 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
+/* 70 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 71 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL *, void const *, int)
+/* 72 */ _CFFI_OP(_CFFI_OP_NOOP, 53),
+/* 73 */ _CFFI_OP(_CFFI_OP_POINTER, 189), // void const *
+/* 74 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
 /* 75 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 76 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL const *, int)
+/* 76 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL const *)
 /* 77 */ _CFFI_OP(_CFFI_OP_NOOP, 25),
-/* 78 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 79 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 80 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *)
-/* 81 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
+/* 78 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 79 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL const *, int)
+/* 80 */ _CFFI_OP(_CFFI_OP_NOOP, 25),
+/* 81 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
 /* 82 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 83 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *, char const *)
+/* 83 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *)
 /* 84 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
-/* 85 */ _CFFI_OP(_CFFI_OP_NOOP, 44),
-/* 86 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 87 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *, uint16_t const *, size_t)
-/* 88 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
-/* 89 */ _CFFI_OP(_CFFI_OP_POINTER, 94), // uint16_t const *
-/* 90 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
-/* 91 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 92 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *, uint16_t)
-/* 93 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
-/* 94 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 20), // uint16_t
-/* 95 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 96 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *, uint8_t const *, unsigned int)
-/* 97 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
-/* 98 */ _CFFI_OP(_CFFI_OP_NOOP, 8),
-/* 99 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 8), // unsigned int
-/* 100 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 101 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(int, int)
-/* 102 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 103 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 104 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 105 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(uint8_t *, uint8_t const *, int, BrotliTransforms const *, int)
-/* 106 */ _CFFI_OP(_CFFI_OP_NOOP, 10),
-/* 107 */ _CFFI_OP(_CFFI_OP_NOOP, 8),
-/* 108 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 109 */ _CFFI_OP(_CFFI_OP_POINTER, 161), // BrotliTransforms const *
-/* 110 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 111 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 112 */ _CFFI_OP(_CFFI_OP_FUNCTION, 173), // struct stack_st_X509 *()(SSL const *)
-/* 113 */ _CFFI_OP(_CFFI_OP_NOOP, 25),
+/* 85 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 86 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *, char const *)
+/* 87 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
+/* 88 */ _CFFI_OP(_CFFI_OP_NOOP, 47),
+/* 89 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 90 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *, uint16_t const *, size_t)
+/* 91 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
+/* 92 */ _CFFI_OP(_CFFI_OP_POINTER, 97), // uint16_t const *
+/* 93 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
+/* 94 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 95 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *, uint16_t)
+/* 96 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
+/* 97 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 20), // uint16_t
+/* 98 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 99 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(SSL_CTX *, uint8_t const *, unsigned int)
+/* 100 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
+/* 101 */ _CFFI_OP(_CFFI_OP_NOOP, 8),
+/* 102 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 8), // unsigned int
+/* 103 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 104 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(int, int)
+/* 105 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
+/* 106 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
+/* 107 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 108 */ _CFFI_OP(_CFFI_OP_FUNCTION, 1), // int()(uint8_t *, uint8_t const *, int, BrotliTransforms const *, int)
+/* 109 */ _CFFI_OP(_CFFI_OP_NOOP, 10),
+/* 110 */ _CFFI_OP(_CFFI_OP_NOOP, 8),
+/* 111 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
+/* 112 */ _CFFI_OP(_CFFI_OP_POINTER, 170), // BrotliTransforms const *
+/* 113 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
 /* 114 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 115 */ _CFFI_OP(_CFFI_OP_FUNCTION, 65), // void *()(X509 const *, int, int *, int *)
-/* 116 */ _CFFI_OP(_CFFI_OP_NOOP, 28),
-/* 117 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 118 */ _CFFI_OP(_CFFI_OP_POINTER, 1), // int *
-/* 119 */ _CFFI_OP(_CFFI_OP_NOOP, 118),
-/* 120 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 121 */ _CFFI_OP(_CFFI_OP_FUNCTION, 65), // void *()(void *, size_t)
-/* 122 */ _CFFI_OP(_CFFI_OP_NOOP, 65),
-/* 123 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
-/* 124 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 125 */ _CFFI_OP(_CFFI_OP_FUNCTION, 179), // void()(BrotliSharedDictionary *)
-/* 126 */ _CFFI_OP(_CFFI_OP_POINTER, 160), // BrotliSharedDictionary *
-/* 127 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 128 */ _CFFI_OP(_CFFI_OP_FUNCTION, 179), // void()(SSL *)
-/* 129 */ _CFFI_OP(_CFFI_OP_NOOP, 50),
-/* 130 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 131 */ _CFFI_OP(_CFFI_OP_FUNCTION, 179), // void()(SSL *, BIO *, BIO *)
-/* 132 */ _CFFI_OP(_CFFI_OP_NOOP, 50),
-/* 133 */ _CFFI_OP(_CFFI_OP_NOOP, 43),
-/* 134 */ _CFFI_OP(_CFFI_OP_NOOP, 43),
-/* 135 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 136 */ _CFFI_OP(_CFFI_OP_FUNCTION, 179), // void()(SSL const *, uint8_t const * *, unsigned int *)
-/* 137 */ _CFFI_OP(_CFFI_OP_NOOP, 25),
-/* 138 */ _CFFI_OP(_CFFI_OP_POINTER, 8), // uint8_t const * *
-/* 139 */ _CFFI_OP(_CFFI_OP_POINTER, 99), // unsigned int *
-/* 140 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 141 */ _CFFI_OP(_CFFI_OP_FUNCTION, 179), // void()(SSL_CTX *)
-/* 142 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
-/* 143 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 144 */ _CFFI_OP(_CFFI_OP_FUNCTION, 179), // void()(SSL_CTX *, int)
-/* 145 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
-/* 146 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
-/* 147 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 148 */ _CFFI_OP(_CFFI_OP_FUNCTION, 179), // void()(void *)
-/* 149 */ _CFFI_OP(_CFFI_OP_NOOP, 65),
-/* 150 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
-/* 151 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 0), // BIO
-/* 152 */ _CFFI_OP(_CFFI_OP_POINTER, 153), // BIO_METHOD const *
-/* 153 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 1), // BIO_METHOD
-/* 154 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 12), // BSSL_ASN1_OBJECT
-/* 155 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 13), // BSSL_ASN1_OCTET_STRING
-/* 156 */ _CFFI_OP(_CFFI_OP_ENUM, 0), // BrotliDecoderResult
-/* 157 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 2), // BrotliPrefixCodeRange
-/* 158 */ _CFFI_OP(_CFFI_OP_ARRAY, 157), // BrotliPrefixCodeRange[26]
-/* 159 */ (_cffi_opcode_t)(26),
-/* 160 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 3), // BrotliSharedDictionary
-/* 161 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 4), // BrotliTransforms
-/* 162 */ _CFFI_OP(_CFFI_OP_POINTER, 163), // CRYPTO_BUFFER *
-/* 163 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 5), // CRYPTO_BUFFER
-/* 164 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 6), // SSL
-/* 165 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 7), // SSL_CTX
-/* 166 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 8), // SSL_METHOD
-/* 167 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 9), // X509
-/* 168 */ _CFFI_OP(_CFFI_OP_POINTER, 169), // X509_EXTENSION *
-/* 169 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 11), // X509_EXTENSION
-/* 170 */ _CFFI_OP(_CFFI_OP_POINTER, 171), // X509_NAME *
-/* 171 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 10), // X509_NAME
-/* 172 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 2), // char
-/* 173 */ _CFFI_OP(_CFFI_OP_POINTER, 174), // struct stack_st_X509 *
-/* 174 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 14), // struct stack_st_X509
-/* 175 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 15), // struct stack_st_X509_EXTENSION
-/* 176 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 18), // uint8_t
-/* 177 */ _CFFI_OP(_CFFI_OP_ARRAY, 176), // uint8_t[2048]
-/* 178 */ (_cffi_opcode_t)(2048),
-/* 179 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 0), // void
+/* 115 */ _CFFI_OP(_CFFI_OP_FUNCTION, 182), // struct stack_st_X509 *()(SSL const *)
+/* 116 */ _CFFI_OP(_CFFI_OP_NOOP, 25),
+/* 117 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 118 */ _CFFI_OP(_CFFI_OP_FUNCTION, 185), // uint32_t()(char const * *, int *)
+/* 119 */ _CFFI_OP(_CFFI_OP_POINTER, 47), // char const * *
+/* 120 */ _CFFI_OP(_CFFI_OP_POINTER, 1), // int *
+/* 121 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 122 */ _CFFI_OP(_CFFI_OP_FUNCTION, 185), // uint32_t()(void)
+/* 123 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 124 */ _CFFI_OP(_CFFI_OP_FUNCTION, 68), // void *()(X509 const *, int, int *, int *)
+/* 125 */ _CFFI_OP(_CFFI_OP_NOOP, 28),
+/* 126 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
+/* 127 */ _CFFI_OP(_CFFI_OP_NOOP, 120),
+/* 128 */ _CFFI_OP(_CFFI_OP_NOOP, 120),
+/* 129 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 130 */ _CFFI_OP(_CFFI_OP_FUNCTION, 68), // void *()(void *, size_t)
+/* 131 */ _CFFI_OP(_CFFI_OP_NOOP, 68),
+/* 132 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 28),
+/* 133 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 134 */ _CFFI_OP(_CFFI_OP_FUNCTION, 189), // void()(BrotliSharedDictionary *)
+/* 135 */ _CFFI_OP(_CFFI_OP_POINTER, 169), // BrotliSharedDictionary *
+/* 136 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 137 */ _CFFI_OP(_CFFI_OP_FUNCTION, 189), // void()(SSL *)
+/* 138 */ _CFFI_OP(_CFFI_OP_NOOP, 53),
+/* 139 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 140 */ _CFFI_OP(_CFFI_OP_FUNCTION, 189), // void()(SSL *, BIO *, BIO *)
+/* 141 */ _CFFI_OP(_CFFI_OP_NOOP, 53),
+/* 142 */ _CFFI_OP(_CFFI_OP_NOOP, 43),
+/* 143 */ _CFFI_OP(_CFFI_OP_NOOP, 43),
+/* 144 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 145 */ _CFFI_OP(_CFFI_OP_FUNCTION, 189), // void()(SSL const *, uint8_t const * *, unsigned int *)
+/* 146 */ _CFFI_OP(_CFFI_OP_NOOP, 25),
+/* 147 */ _CFFI_OP(_CFFI_OP_POINTER, 8), // uint8_t const * *
+/* 148 */ _CFFI_OP(_CFFI_OP_POINTER, 102), // unsigned int *
+/* 149 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 150 */ _CFFI_OP(_CFFI_OP_FUNCTION, 189), // void()(SSL_CTX *)
+/* 151 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
+/* 152 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 153 */ _CFFI_OP(_CFFI_OP_FUNCTION, 189), // void()(SSL_CTX *, int)
+/* 154 */ _CFFI_OP(_CFFI_OP_NOOP, 17),
+/* 155 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 7),
+/* 156 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 157 */ _CFFI_OP(_CFFI_OP_FUNCTION, 189), // void()(void *)
+/* 158 */ _CFFI_OP(_CFFI_OP_NOOP, 68),
+/* 159 */ _CFFI_OP(_CFFI_OP_FUNCTION_END, 0),
+/* 160 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 0), // BIO
+/* 161 */ _CFFI_OP(_CFFI_OP_POINTER, 162), // BIO_METHOD const *
+/* 162 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 1), // BIO_METHOD
+/* 163 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 12), // BSSL_ASN1_OBJECT
+/* 164 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 13), // BSSL_ASN1_OCTET_STRING
+/* 165 */ _CFFI_OP(_CFFI_OP_ENUM, 0), // BrotliDecoderResult
+/* 166 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 2), // BrotliPrefixCodeRange
+/* 167 */ _CFFI_OP(_CFFI_OP_ARRAY, 166), // BrotliPrefixCodeRange[26]
+/* 168 */ (_cffi_opcode_t)(26),
+/* 169 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 3), // BrotliSharedDictionary
+/* 170 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 4), // BrotliTransforms
+/* 171 */ _CFFI_OP(_CFFI_OP_POINTER, 172), // CRYPTO_BUFFER *
+/* 172 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 5), // CRYPTO_BUFFER
+/* 173 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 6), // SSL
+/* 174 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 7), // SSL_CTX
+/* 175 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 8), // SSL_METHOD
+/* 176 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 9), // X509
+/* 177 */ _CFFI_OP(_CFFI_OP_POINTER, 178), // X509_EXTENSION *
+/* 178 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 11), // X509_EXTENSION
+/* 179 */ _CFFI_OP(_CFFI_OP_POINTER, 180), // X509_NAME *
+/* 180 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 10), // X509_NAME
+/* 181 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 2), // char
+/* 182 */ _CFFI_OP(_CFFI_OP_POINTER, 183), // struct stack_st_X509 *
+/* 183 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 14), // struct stack_st_X509
+/* 184 */ _CFFI_OP(_CFFI_OP_STRUCT_UNION, 15), // struct stack_st_X509_EXTENSION
+/* 185 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 22), // uint32_t
+/* 186 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 18), // uint8_t
+/* 187 */ _CFFI_OP(_CFFI_OP_ARRAY, 186), // uint8_t[2048]
+/* 188 */ (_cffi_opcode_t)(2048),
+/* 189 */ _CFFI_OP(_CFFI_OP_PRIMITIVE, 0), // void
 };
 
 static int _cffi_const_BROTLI_DECODER_RESULT_ERROR(unsigned long long *o)
@@ -827,6 +838,44 @@ static void _cffi_checkfld_typedef_BrotliPrefixCodeRange(BrotliPrefixCodeRange *
   (void)((p->nbits) | 0);  /* check that 'BrotliPrefixCodeRange.nbits' is an integer */
 }
 struct _cffi_align_typedef_BrotliPrefixCodeRange { char x; BrotliPrefixCodeRange y; };
+
+static int _cffi_d_BSSL_BIO_free(BIO * x0)
+{
+  return BSSL_BIO_free(x0);
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_BIO_free(PyObject *self, PyObject *arg0)
+{
+  BIO * x0;
+  Py_ssize_t datasize;
+  struct _cffi_freeme_s *large_args_free = NULL;
+  int result;
+  PyObject *pyresult;
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(43), arg0, (char **)&x0);
+  if (datasize != 0) {
+    x0 = ((size_t)datasize) <= 640 ? (BIO *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(43), arg0, (char **)&x0,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { result = BSSL_BIO_free(x0); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  pyresult = _cffi_from_c_int(result, int);
+  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
+  return pyresult;
+}
+#else
+#  define _cffi_f_BSSL_BIO_free _cffi_d_BSSL_BIO_free
+#endif
 
 static BIO * _cffi_d_BSSL_BIO_new_socket(int x0, int x1)
 {
@@ -887,7 +936,7 @@ _cffi_f_BSSL_BIO_s_mem(PyObject *self, PyObject *noarg)
 
   (void)self; /* unused */
   (void)noarg; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(152));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(161));
   return pyresult;
 }
 #else
@@ -934,12 +983,91 @@ _cffi_f_BSSL_CRYPTO_BUFFER_alloc(PyObject *self, PyObject *args)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(162));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(171));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
 #else
 #  define _cffi_f_BSSL_CRYPTO_BUFFER_alloc _cffi_d_BSSL_CRYPTO_BUFFER_alloc
+#endif
+
+static uint32_t _cffi_d_BSSL_ERR_get_error(void)
+{
+  return BSSL_ERR_get_error();
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_ERR_get_error(PyObject *self, PyObject *noarg)
+{
+  uint32_t result;
+  PyObject *pyresult;
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { result = BSSL_ERR_get_error(); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  (void)noarg; /* unused */
+  pyresult = _cffi_from_c_int(result, uint32_t);
+  return pyresult;
+}
+#else
+#  define _cffi_f_BSSL_ERR_get_error _cffi_d_BSSL_ERR_get_error
+#endif
+
+static uint32_t _cffi_d_BSSL_ERR_get_error_line(char const * * x0, int * x1)
+{
+  return BSSL_ERR_get_error_line(x0, x1);
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_ERR_get_error_line(PyObject *self, PyObject *args)
+{
+  char const * * x0;
+  int * x1;
+  Py_ssize_t datasize;
+  struct _cffi_freeme_s *large_args_free = NULL;
+  uint32_t result;
+  PyObject *pyresult;
+  PyObject *arg0;
+  PyObject *arg1;
+
+  if (!PyArg_UnpackTuple(args, "BSSL_ERR_get_error_line", 2, 2, &arg0, &arg1))
+    return NULL;
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(119), arg0, (char **)&x0);
+  if (datasize != 0) {
+    x0 = ((size_t)datasize) <= 640 ? (char const * *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(119), arg0, (char **)&x0,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(120), arg1, (char **)&x1);
+  if (datasize != 0) {
+    x1 = ((size_t)datasize) <= 640 ? (int *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(120), arg1, (char **)&x1,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { result = BSSL_ERR_get_error_line(x0, x1); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  pyresult = _cffi_from_c_int(result, uint32_t);
+  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
+  return pyresult;
+}
+#else
+#  define _cffi_f_BSSL_ERR_get_error_line _cffi_d_BSSL_ERR_get_error_line
 #endif
 
 static void _cffi_d_BSSL_SSL_CTX_enable_ocsp_stapling(SSL_CTX * x0)
@@ -1012,6 +1140,42 @@ _cffi_f_BSSL_SSL_CTX_enable_signed_cert_timestamps(PyObject *self, PyObject *arg
 }
 #else
 #  define _cffi_f_BSSL_SSL_CTX_enable_signed_cert_timestamps _cffi_d_BSSL_SSL_CTX_enable_signed_cert_timestamps
+#endif
+
+static void _cffi_d_BSSL_SSL_CTX_free(SSL_CTX * x0)
+{
+  BSSL_SSL_CTX_free(x0);
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_SSL_CTX_free(PyObject *self, PyObject *arg0)
+{
+  SSL_CTX * x0;
+  Py_ssize_t datasize;
+  struct _cffi_freeme_s *large_args_free = NULL;
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(17), arg0, (char **)&x0);
+  if (datasize != 0) {
+    x0 = ((size_t)datasize) <= 640 ? (SSL_CTX *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(17), arg0, (char **)&x0,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { BSSL_SSL_CTX_free(x0); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
+  Py_INCREF(Py_None);
+  return Py_None;
+}
+#else
+#  define _cffi_f_BSSL_SSL_CTX_free _cffi_d_BSSL_SSL_CTX_free
 #endif
 
 static SSL_CTX * _cffi_d_BSSL_SSL_CTX_new(SSL_METHOD const * x0)
@@ -1141,10 +1305,10 @@ _cffi_f_BSSL_SSL_CTX_set_cipher_list(PyObject *self, PyObject *args)
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(44), arg1, (char **)&x1);
+      _cffi_type(47), arg1, (char **)&x1);
   if (datasize != 0) {
     x1 = ((size_t)datasize) <= 640 ? (char const *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(44), arg1, (char **)&x1,
+    if (_cffi_convert_array_argument(_cffi_type(47), arg1, (char **)&x1,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1290,10 +1454,10 @@ _cffi_f_BSSL_SSL_CTX_set_verify_algorithm_prefs(PyObject *self, PyObject *args)
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(89), arg1, (char **)&x1);
+      _cffi_type(92), arg1, (char **)&x1);
   if (datasize != 0) {
     x1 = ((size_t)datasize) <= 640 ? (uint16_t const *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(89), arg1, (char **)&x1,
+    if (_cffi_convert_array_argument(_cffi_type(92), arg1, (char **)&x1,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1315,6 +1479,44 @@ _cffi_f_BSSL_SSL_CTX_set_verify_algorithm_prefs(PyObject *self, PyObject *args)
 }
 #else
 #  define _cffi_f_BSSL_SSL_CTX_set_verify_algorithm_prefs _cffi_d_BSSL_SSL_CTX_set_verify_algorithm_prefs
+#endif
+
+static int _cffi_d_BSSL_SSL_accept(SSL * x0)
+{
+  return BSSL_SSL_accept(x0);
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_SSL_accept(PyObject *self, PyObject *arg0)
+{
+  SSL * x0;
+  Py_ssize_t datasize;
+  struct _cffi_freeme_s *large_args_free = NULL;
+  int result;
+  PyObject *pyresult;
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(53), arg0, (char **)&x0);
+  if (datasize != 0) {
+    x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { result = BSSL_SSL_accept(x0); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  pyresult = _cffi_from_c_int(result, int);
+  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
+  return pyresult;
+}
+#else
+#  define _cffi_f_BSSL_SSL_accept _cffi_d_BSSL_SSL_accept
 #endif
 
 static int _cffi_d_BSSL_SSL_add_application_settings(SSL * x0, uint8_t const * x1, size_t x2, uint8_t const * x3, size_t x4)
@@ -1344,10 +1546,10 @@ _cffi_f_BSSL_SSL_add_application_settings(PyObject *self, PyObject *args)
     return NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1408,10 +1610,10 @@ _cffi_f_BSSL_SSL_connect(PyObject *self, PyObject *arg0)
   PyObject *pyresult;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1446,10 +1648,10 @@ _cffi_f_BSSL_SSL_do_handshake(PyObject *self, PyObject *arg0)
   PyObject *pyresult;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1482,10 +1684,10 @@ _cffi_f_BSSL_SSL_free(PyObject *self, PyObject *arg0)
   struct _cffi_freeme_s *large_args_free = NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1535,19 +1737,19 @@ _cffi_f_BSSL_SSL_get0_alpn_selected(PyObject *self, PyObject *args)
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(138), arg1, (char **)&x1);
+      _cffi_type(147), arg1, (char **)&x1);
   if (datasize != 0) {
     x1 = ((size_t)datasize) <= 640 ? (uint8_t const * *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(138), arg1, (char **)&x1,
+    if (_cffi_convert_array_argument(_cffi_type(147), arg1, (char **)&x1,
             datasize, &large_args_free) < 0)
       return NULL;
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(139), arg2, (char **)&x2);
+      _cffi_type(148), arg2, (char **)&x2);
   if (datasize != 0) {
     x2 = ((size_t)datasize) <= 640 ? (unsigned int *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(139), arg2, (char **)&x2,
+    if (_cffi_convert_array_argument(_cffi_type(148), arg2, (char **)&x2,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1615,6 +1817,44 @@ _cffi_f_BSSL_SSL_get_error(PyObject *self, PyObject *args)
 #  define _cffi_f_BSSL_SSL_get_error _cffi_d_BSSL_SSL_get_error
 #endif
 
+static int _cffi_d_BSSL_SSL_get_fd(SSL const * x0)
+{
+  return BSSL_SSL_get_fd(x0);
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_SSL_get_fd(PyObject *self, PyObject *arg0)
+{
+  SSL const * x0;
+  Py_ssize_t datasize;
+  struct _cffi_freeme_s *large_args_free = NULL;
+  int result;
+  PyObject *pyresult;
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(25), arg0, (char **)&x0);
+  if (datasize != 0) {
+    x0 = ((size_t)datasize) <= 640 ? (SSL const *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(25), arg0, (char **)&x0,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { result = BSSL_SSL_get_fd(x0); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  pyresult = _cffi_from_c_int(result, int);
+  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
+  return pyresult;
+}
+#else
+#  define _cffi_f_BSSL_SSL_get_fd _cffi_d_BSSL_SSL_get_fd
+#endif
+
 static struct stack_st_X509 * _cffi_d_BSSL_SSL_get_peer_cert_chain(SSL const * x0)
 {
   return BSSL_SSL_get_peer_cert_chain(x0);
@@ -1645,7 +1885,7 @@ _cffi_f_BSSL_SSL_get_peer_cert_chain(PyObject *self, PyObject *arg0)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(173));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(182));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
@@ -1721,12 +1961,50 @@ _cffi_f_BSSL_SSL_get_peer_full_cert_chain(PyObject *self, PyObject *arg0)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(173));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(182));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
 #else
 #  define _cffi_f_BSSL_SSL_get_peer_full_cert_chain _cffi_d_BSSL_SSL_get_peer_full_cert_chain
+#endif
+
+static int _cffi_d_BSSL_SSL_has_pending(SSL const * x0)
+{
+  return BSSL_SSL_has_pending(x0);
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_SSL_has_pending(PyObject *self, PyObject *arg0)
+{
+  SSL const * x0;
+  Py_ssize_t datasize;
+  struct _cffi_freeme_s *large_args_free = NULL;
+  int result;
+  PyObject *pyresult;
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(25), arg0, (char **)&x0);
+  if (datasize != 0) {
+    x0 = ((size_t)datasize) <= 640 ? (SSL const *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(25), arg0, (char **)&x0,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { result = BSSL_SSL_has_pending(x0); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  pyresult = _cffi_from_c_int(result, int);
+  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
+  return pyresult;
+}
+#else
+#  define _cffi_f_BSSL_SSL_has_pending _cffi_d_BSSL_SSL_has_pending
 #endif
 
 static SSL * _cffi_d_BSSL_SSL_new(SSL_CTX * x0)
@@ -1759,12 +2037,109 @@ _cffi_f_BSSL_SSL_new(PyObject *self, PyObject *arg0)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(50));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(53));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
 #else
 #  define _cffi_f_BSSL_SSL_new _cffi_d_BSSL_SSL_new
+#endif
+
+static int _cffi_d_BSSL_SSL_peek(SSL * x0, void * x1, int x2)
+{
+  return BSSL_SSL_peek(x0, x1, x2);
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_SSL_peek(PyObject *self, PyObject *args)
+{
+  SSL * x0;
+  void * x1;
+  int x2;
+  Py_ssize_t datasize;
+  struct _cffi_freeme_s *large_args_free = NULL;
+  int result;
+  PyObject *pyresult;
+  PyObject *arg0;
+  PyObject *arg1;
+  PyObject *arg2;
+
+  if (!PyArg_UnpackTuple(args, "BSSL_SSL_peek", 3, 3, &arg0, &arg1, &arg2))
+    return NULL;
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(53), arg0, (char **)&x0);
+  if (datasize != 0) {
+    x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(68), arg1, (char **)&x1);
+  if (datasize != 0) {
+    x1 = ((size_t)datasize) <= 640 ? (void *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(68), arg1, (char **)&x1,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  x2 = _cffi_to_c_int(arg2, int);
+  if (x2 == (int)-1 && PyErr_Occurred())
+    return NULL;
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { result = BSSL_SSL_peek(x0, x1, x2); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  pyresult = _cffi_from_c_int(result, int);
+  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
+  return pyresult;
+}
+#else
+#  define _cffi_f_BSSL_SSL_peek _cffi_d_BSSL_SSL_peek
+#endif
+
+static int _cffi_d_BSSL_SSL_pending(SSL const * x0)
+{
+  return BSSL_SSL_pending(x0);
+}
+#ifndef PYPY_VERSION
+static PyObject *
+_cffi_f_BSSL_SSL_pending(PyObject *self, PyObject *arg0)
+{
+  SSL const * x0;
+  Py_ssize_t datasize;
+  struct _cffi_freeme_s *large_args_free = NULL;
+  int result;
+  PyObject *pyresult;
+
+  datasize = _cffi_prepare_pointer_call_argument(
+      _cffi_type(25), arg0, (char **)&x0);
+  if (datasize != 0) {
+    x0 = ((size_t)datasize) <= 640 ? (SSL const *)alloca((size_t)datasize) : NULL;
+    if (_cffi_convert_array_argument(_cffi_type(25), arg0, (char **)&x0,
+            datasize, &large_args_free) < 0)
+      return NULL;
+  }
+
+  Py_BEGIN_ALLOW_THREADS
+  _cffi_restore_errno();
+  { result = BSSL_SSL_pending(x0); }
+  _cffi_save_errno();
+  Py_END_ALLOW_THREADS
+
+  (void)self; /* unused */
+  pyresult = _cffi_from_c_int(result, int);
+  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
+  return pyresult;
+}
+#else
+#  define _cffi_f_BSSL_SSL_pending _cffi_d_BSSL_SSL_pending
 #endif
 
 static int _cffi_d_BSSL_SSL_read(SSL * x0, void * x1, int x2)
@@ -1790,19 +2165,19 @@ _cffi_f_BSSL_SSL_read(PyObject *self, PyObject *args)
     return NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(65), arg1, (char **)&x1);
+      _cffi_type(68), arg1, (char **)&x1);
   if (datasize != 0) {
     x1 = ((size_t)datasize) <= 640 ? (void *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(65), arg1, (char **)&x1,
+    if (_cffi_convert_array_argument(_cffi_type(68), arg1, (char **)&x1,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1847,10 +2222,10 @@ _cffi_f_BSSL_SSL_set_bio(PyObject *self, PyObject *args)
     return NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1909,19 +2284,19 @@ _cffi_f_BSSL_SSL_set_tlsext_host_name(PyObject *self, PyObject *args)
     return NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(44), arg1, (char **)&x1);
+      _cffi_type(47), arg1, (char **)&x1);
   if (datasize != 0) {
     x1 = ((size_t)datasize) <= 640 ? (char const *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(44), arg1, (char **)&x1,
+    if (_cffi_convert_array_argument(_cffi_type(47), arg1, (char **)&x1,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -1956,10 +2331,10 @@ _cffi_f_BSSL_SSL_shutdown(PyObject *self, PyObject *arg0)
   PyObject *pyresult;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -2002,19 +2377,19 @@ _cffi_f_BSSL_SSL_write(PyObject *self, PyObject *args)
     return NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(50), arg0, (char **)&x0);
+      _cffi_type(53), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (SSL *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(50), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(53), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(70), arg1, (char **)&x1);
+      _cffi_type(73), arg1, (char **)&x1);
   if (datasize != 0) {
     x1 = ((size_t)datasize) <= 640 ? (void const *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(70), arg1, (char **)&x1,
+    if (_cffi_convert_array_argument(_cffi_type(73), arg1, (char **)&x1,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -2100,19 +2475,19 @@ _cffi_f_BSSL_X509V3_extensions_print(PyObject *self, PyObject *args)
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(44), arg1, (char **)&x1);
+      _cffi_type(47), arg1, (char **)&x1);
   if (datasize != 0) {
     x1 = ((size_t)datasize) <= 640 ? (char const *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(44), arg1, (char **)&x1,
+    if (_cffi_convert_array_argument(_cffi_type(47), arg1, (char **)&x1,
             datasize, &large_args_free) < 0)
       return NULL;
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(45), arg2, (char **)&x2);
+      _cffi_type(48), arg2, (char **)&x2);
   if (datasize != 0) {
     x2 = ((size_t)datasize) <= 640 ? (struct stack_st_X509_EXTENSION const *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(45), arg2, (char **)&x2,
+    if (_cffi_convert_array_argument(_cffi_type(48), arg2, (char **)&x2,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -2239,7 +2614,7 @@ _cffi_f_BSSL_X509_get_ext(PyObject *self, PyObject *args)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(168));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(177));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
@@ -2285,19 +2660,19 @@ _cffi_f_BSSL_X509_get_ext_d2i(PyObject *self, PyObject *args)
     return NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(118), arg2, (char **)&x2);
+      _cffi_type(120), arg2, (char **)&x2);
   if (datasize != 0) {
     x2 = ((size_t)datasize) <= 640 ? (int *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(118), arg2, (char **)&x2,
+    if (_cffi_convert_array_argument(_cffi_type(120), arg2, (char **)&x2,
             datasize, &large_args_free) < 0)
       return NULL;
   }
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(118), arg3, (char **)&x3);
+      _cffi_type(120), arg3, (char **)&x3);
   if (datasize != 0) {
     x3 = ((size_t)datasize) <= 640 ? (int *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(118), arg3, (char **)&x3,
+    if (_cffi_convert_array_argument(_cffi_type(120), arg3, (char **)&x3,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -2309,7 +2684,7 @@ _cffi_f_BSSL_X509_get_ext_d2i(PyObject *self, PyObject *args)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(65));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(68));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
@@ -2347,7 +2722,7 @@ _cffi_f_BSSL_X509_get_issuer_name(PyObject *self, PyObject *arg0)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(170));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(179));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
@@ -2385,7 +2760,7 @@ _cffi_f_BSSL_X509_get_subject_name(PyObject *self, PyObject *arg0)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(170));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(179));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
@@ -2455,7 +2830,7 @@ _cffi_f_BrotliDecoderDecompress(PyObject *self, PyObject *args)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_deref((char *)&result, _cffi_type(156));
+  pyresult = _cffi_from_c_deref((char *)&result, _cffi_type(165));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
@@ -2484,10 +2859,10 @@ _cffi_f_BrotliDefaultAllocFunc(PyObject *self, PyObject *args)
     return NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(65), arg0, (char **)&x0);
+      _cffi_type(68), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (void *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(65), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(68), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -2503,7 +2878,7 @@ _cffi_f_BrotliDefaultAllocFunc(PyObject *self, PyObject *args)
   Py_END_ALLOW_THREADS
 
   (void)self; /* unused */
-  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(65));
+  pyresult = _cffi_from_c_pointer((char *)result, _cffi_type(68));
   if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
   return pyresult;
 }
@@ -2524,10 +2899,10 @@ _cffi_f_BrotliSharedDictionaryDestroyInstance(PyObject *self, PyObject *arg0)
   struct _cffi_freeme_s *large_args_free = NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(126), arg0, (char **)&x0);
+      _cffi_type(135), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (BrotliSharedDictionary *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(126), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(135), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -2596,10 +2971,10 @@ _cffi_f_BrotliTransformDictionaryWord(PyObject *self, PyObject *args)
     return NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(109), arg3, (char **)&x3);
+      _cffi_type(112), arg3, (char **)&x3);
   if (datasize != 0) {
     x3 = ((size_t)datasize) <= 640 ? (BrotliTransforms const *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(109), arg3, (char **)&x3,
+    if (_cffi_convert_array_argument(_cffi_type(112), arg3, (char **)&x3,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -2621,44 +2996,6 @@ _cffi_f_BrotliTransformDictionaryWord(PyObject *self, PyObject *args)
 }
 #else
 #  define _cffi_f_BrotliTransformDictionaryWord _cffi_d_BrotliTransformDictionaryWord
-#endif
-
-static int _cffi_d_SSL_pending(SSL const * x0)
-{
-  return SSL_pending(x0);
-}
-#ifndef PYPY_VERSION
-static PyObject *
-_cffi_f_SSL_pending(PyObject *self, PyObject *arg0)
-{
-  SSL const * x0;
-  Py_ssize_t datasize;
-  struct _cffi_freeme_s *large_args_free = NULL;
-  int result;
-  PyObject *pyresult;
-
-  datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(25), arg0, (char **)&x0);
-  if (datasize != 0) {
-    x0 = ((size_t)datasize) <= 640 ? (SSL const *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(25), arg0, (char **)&x0,
-            datasize, &large_args_free) < 0)
-      return NULL;
-  }
-
-  Py_BEGIN_ALLOW_THREADS
-  _cffi_restore_errno();
-  { result = SSL_pending(x0); }
-  _cffi_save_errno();
-  Py_END_ALLOW_THREADS
-
-  (void)self; /* unused */
-  pyresult = _cffi_from_c_int(result, int);
-  if (large_args_free != NULL) _cffi_free_array_arguments(large_args_free);
-  return pyresult;
-}
-#else
-#  define _cffi_f_SSL_pending _cffi_d_SSL_pending
 #endif
 
 static int _cffi_d_SetCompression(SSL_CTX * x0)
@@ -2712,10 +3049,10 @@ _cffi_f_free(PyObject *self, PyObject *arg0)
   struct _cffi_freeme_s *large_args_free = NULL;
 
   datasize = _cffi_prepare_pointer_call_argument(
-      _cffi_type(65), arg0, (char **)&x0);
+      _cffi_type(68), arg0, (char **)&x0);
   if (datasize != 0) {
     x0 = ((size_t)datasize) <= 640 ? (void *)alloca((size_t)datasize) : NULL;
-    if (_cffi_convert_array_argument(_cffi_type(65), arg0, (char **)&x0,
+    if (_cffi_convert_array_argument(_cffi_type(68), arg0, (char **)&x0,
             datasize, &large_args_free) < 0)
       return NULL;
   }
@@ -2838,117 +3175,125 @@ static const struct _cffi_global_s _cffi_globals[] = {
   { "BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT", (void *)_cffi_const_BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT, _CFFI_OP(_CFFI_OP_ENUM, -1), (void *)0 },
   { "BROTLI_DECODER_RESULT_SUCCESS", (void *)_cffi_const_BROTLI_DECODER_RESULT_SUCCESS, _CFFI_OP(_CFFI_OP_ENUM, -1), (void *)0 },
   { "BROTLI_NUM_BLOCK_LEN_SYMBOLS", (void *)_cffi_const_BROTLI_NUM_BLOCK_LEN_SYMBOLS, _CFFI_OP(_CFFI_OP_CONSTANT_INT, -1), (void *)0 },
+  { "BSSL_BIO_free", (void *)_cffi_f_BSSL_BIO_free, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 42), (void *)_cffi_d_BSSL_BIO_free },
   { "BSSL_BIO_new_socket", (void *)_cffi_f_BSSL_BIO_new_socket, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 0), (void *)_cffi_d_BSSL_BIO_new_socket },
   { "BSSL_BIO_s_mem", (void *)_cffi_f_BSSL_BIO_s_mem, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_N, 4), (void *)_cffi_d_BSSL_BIO_s_mem },
   { "BSSL_CRYPTO_BUFFER_alloc", (void *)_cffi_f_BSSL_CRYPTO_BUFFER_alloc, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 12), (void *)_cffi_d_BSSL_CRYPTO_BUFFER_alloc },
-  { "BSSL_SSL_CTX_enable_ocsp_stapling", (void *)_cffi_f_BSSL_SSL_CTX_enable_ocsp_stapling, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 141), (void *)_cffi_d_BSSL_SSL_CTX_enable_ocsp_stapling },
-  { "BSSL_SSL_CTX_enable_signed_cert_timestamps", (void *)_cffi_f_BSSL_SSL_CTX_enable_signed_cert_timestamps, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 141), (void *)_cffi_d_BSSL_SSL_CTX_enable_signed_cert_timestamps },
+  { "BSSL_ERR_get_error", (void *)_cffi_f_BSSL_ERR_get_error, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_N, 122), (void *)_cffi_d_BSSL_ERR_get_error },
+  { "BSSL_ERR_get_error_line", (void *)_cffi_f_BSSL_ERR_get_error_line, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 118), (void *)_cffi_d_BSSL_ERR_get_error_line },
+  { "BSSL_SSL_CTX_enable_ocsp_stapling", (void *)_cffi_f_BSSL_SSL_CTX_enable_ocsp_stapling, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 150), (void *)_cffi_d_BSSL_SSL_CTX_enable_ocsp_stapling },
+  { "BSSL_SSL_CTX_enable_signed_cert_timestamps", (void *)_cffi_f_BSSL_SSL_CTX_enable_signed_cert_timestamps, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 150), (void *)_cffi_d_BSSL_SSL_CTX_enable_signed_cert_timestamps },
+  { "BSSL_SSL_CTX_free", (void *)_cffi_f_BSSL_SSL_CTX_free, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 150), (void *)_cffi_d_BSSL_SSL_CTX_free },
   { "BSSL_SSL_CTX_new", (void *)_cffi_f_BSSL_SSL_CTX_new, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 19), (void *)_cffi_d_BSSL_SSL_CTX_new },
-  { "BSSL_SSL_CTX_set_alpn_protos", (void *)_cffi_f_BSSL_SSL_CTX_set_alpn_protos, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 96), (void *)_cffi_d_BSSL_SSL_CTX_set_alpn_protos },
-  { "BSSL_SSL_CTX_set_cipher_list", (void *)_cffi_f_BSSL_SSL_CTX_set_cipher_list, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 83), (void *)_cffi_d_BSSL_SSL_CTX_set_cipher_list },
-  { "BSSL_SSL_CTX_set_grease_enabled", (void *)_cffi_f_BSSL_SSL_CTX_set_grease_enabled, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 144), (void *)_cffi_d_BSSL_SSL_CTX_set_grease_enabled },
-  { "BSSL_SSL_CTX_set_min_proto_version", (void *)_cffi_f_BSSL_SSL_CTX_set_min_proto_version, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 92), (void *)_cffi_d_BSSL_SSL_CTX_set_min_proto_version },
-  { "BSSL_SSL_CTX_set_verify_algorithm_prefs", (void *)_cffi_f_BSSL_SSL_CTX_set_verify_algorithm_prefs, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 87), (void *)_cffi_d_BSSL_SSL_CTX_set_verify_algorithm_prefs },
-  { "BSSL_SSL_add_application_settings", (void *)_cffi_f_BSSL_SSL_add_application_settings, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 56), (void *)_cffi_d_BSSL_SSL_add_application_settings },
-  { "BSSL_SSL_connect", (void *)_cffi_f_BSSL_SSL_connect, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 49), (void *)_cffi_d_BSSL_SSL_connect },
-  { "BSSL_SSL_do_handshake", (void *)_cffi_f_BSSL_SSL_do_handshake, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 49), (void *)_cffi_d_BSSL_SSL_do_handshake },
-  { "BSSL_SSL_free", (void *)_cffi_f_BSSL_SSL_free, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 128), (void *)_cffi_d_BSSL_SSL_free },
-  { "BSSL_SSL_get0_alpn_selected", (void *)_cffi_f_BSSL_SSL_get0_alpn_selected, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 136), (void *)_cffi_d_BSSL_SSL_get0_alpn_selected },
-  { "BSSL_SSL_get_error", (void *)_cffi_f_BSSL_SSL_get_error, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 76), (void *)_cffi_d_BSSL_SSL_get_error },
-  { "BSSL_SSL_get_peer_cert_chain", (void *)_cffi_f_BSSL_SSL_get_peer_cert_chain, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 112), (void *)_cffi_d_BSSL_SSL_get_peer_cert_chain },
+  { "BSSL_SSL_CTX_set_alpn_protos", (void *)_cffi_f_BSSL_SSL_CTX_set_alpn_protos, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 99), (void *)_cffi_d_BSSL_SSL_CTX_set_alpn_protos },
+  { "BSSL_SSL_CTX_set_cipher_list", (void *)_cffi_f_BSSL_SSL_CTX_set_cipher_list, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 86), (void *)_cffi_d_BSSL_SSL_CTX_set_cipher_list },
+  { "BSSL_SSL_CTX_set_grease_enabled", (void *)_cffi_f_BSSL_SSL_CTX_set_grease_enabled, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 153), (void *)_cffi_d_BSSL_SSL_CTX_set_grease_enabled },
+  { "BSSL_SSL_CTX_set_min_proto_version", (void *)_cffi_f_BSSL_SSL_CTX_set_min_proto_version, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 95), (void *)_cffi_d_BSSL_SSL_CTX_set_min_proto_version },
+  { "BSSL_SSL_CTX_set_verify_algorithm_prefs", (void *)_cffi_f_BSSL_SSL_CTX_set_verify_algorithm_prefs, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 90), (void *)_cffi_d_BSSL_SSL_CTX_set_verify_algorithm_prefs },
+  { "BSSL_SSL_accept", (void *)_cffi_f_BSSL_SSL_accept, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 52), (void *)_cffi_d_BSSL_SSL_accept },
+  { "BSSL_SSL_add_application_settings", (void *)_cffi_f_BSSL_SSL_add_application_settings, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 59), (void *)_cffi_d_BSSL_SSL_add_application_settings },
+  { "BSSL_SSL_connect", (void *)_cffi_f_BSSL_SSL_connect, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 52), (void *)_cffi_d_BSSL_SSL_connect },
+  { "BSSL_SSL_do_handshake", (void *)_cffi_f_BSSL_SSL_do_handshake, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 52), (void *)_cffi_d_BSSL_SSL_do_handshake },
+  { "BSSL_SSL_free", (void *)_cffi_f_BSSL_SSL_free, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 137), (void *)_cffi_d_BSSL_SSL_free },
+  { "BSSL_SSL_get0_alpn_selected", (void *)_cffi_f_BSSL_SSL_get0_alpn_selected, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 145), (void *)_cffi_d_BSSL_SSL_get0_alpn_selected },
+  { "BSSL_SSL_get_error", (void *)_cffi_f_BSSL_SSL_get_error, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 79), (void *)_cffi_d_BSSL_SSL_get_error },
+  { "BSSL_SSL_get_fd", (void *)_cffi_f_BSSL_SSL_get_fd, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 76), (void *)_cffi_d_BSSL_SSL_get_fd },
+  { "BSSL_SSL_get_peer_cert_chain", (void *)_cffi_f_BSSL_SSL_get_peer_cert_chain, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 115), (void *)_cffi_d_BSSL_SSL_get_peer_cert_chain },
   { "BSSL_SSL_get_peer_certificate", (void *)_cffi_f_BSSL_SSL_get_peer_certificate, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 24), (void *)_cffi_d_BSSL_SSL_get_peer_certificate },
-  { "BSSL_SSL_get_peer_full_cert_chain", (void *)_cffi_f_BSSL_SSL_get_peer_full_cert_chain, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 112), (void *)_cffi_d_BSSL_SSL_get_peer_full_cert_chain },
+  { "BSSL_SSL_get_peer_full_cert_chain", (void *)_cffi_f_BSSL_SSL_get_peer_full_cert_chain, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 115), (void *)_cffi_d_BSSL_SSL_get_peer_full_cert_chain },
+  { "BSSL_SSL_has_pending", (void *)_cffi_f_BSSL_SSL_has_pending, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 76), (void *)_cffi_d_BSSL_SSL_has_pending },
   { "BSSL_SSL_new", (void *)_cffi_f_BSSL_SSL_new, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 16), (void *)_cffi_d_BSSL_SSL_new },
-  { "BSSL_SSL_read", (void *)_cffi_f_BSSL_SSL_read, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 63), (void *)_cffi_d_BSSL_SSL_read },
-  { "BSSL_SSL_set_bio", (void *)_cffi_f_BSSL_SSL_set_bio, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 131), (void *)_cffi_d_BSSL_SSL_set_bio },
-  { "BSSL_SSL_set_tlsext_host_name", (void *)_cffi_f_BSSL_SSL_set_tlsext_host_name, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 52), (void *)_cffi_d_BSSL_SSL_set_tlsext_host_name },
-  { "BSSL_SSL_shutdown", (void *)_cffi_f_BSSL_SSL_shutdown, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 49), (void *)_cffi_d_BSSL_SSL_shutdown },
-  { "BSSL_SSL_write", (void *)_cffi_f_BSSL_SSL_write, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 68), (void *)_cffi_d_BSSL_SSL_write },
+  { "BSSL_SSL_peek", (void *)_cffi_f_BSSL_SSL_peek, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 66), (void *)_cffi_d_BSSL_SSL_peek },
+  { "BSSL_SSL_pending", (void *)_cffi_f_BSSL_SSL_pending, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 76), (void *)_cffi_d_BSSL_SSL_pending },
+  { "BSSL_SSL_read", (void *)_cffi_f_BSSL_SSL_read, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 66), (void *)_cffi_d_BSSL_SSL_read },
+  { "BSSL_SSL_set_bio", (void *)_cffi_f_BSSL_SSL_set_bio, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 140), (void *)_cffi_d_BSSL_SSL_set_bio },
+  { "BSSL_SSL_set_tlsext_host_name", (void *)_cffi_f_BSSL_SSL_set_tlsext_host_name, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 55), (void *)_cffi_d_BSSL_SSL_set_tlsext_host_name },
+  { "BSSL_SSL_shutdown", (void *)_cffi_f_BSSL_SSL_shutdown, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 52), (void *)_cffi_d_BSSL_SSL_shutdown },
+  { "BSSL_SSL_write", (void *)_cffi_f_BSSL_SSL_write, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 71), (void *)_cffi_d_BSSL_SSL_write },
   { "BSSL_TLS_method", (void *)_cffi_f_BSSL_TLS_method, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_N, 22), (void *)_cffi_d_BSSL_TLS_method },
-  { "BSSL_X509V3_extensions_print", (void *)_cffi_f_BSSL_X509V3_extensions_print, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 42), (void *)_cffi_d_BSSL_X509V3_extensions_print },
+  { "BSSL_X509V3_extensions_print", (void *)_cffi_f_BSSL_X509V3_extensions_print, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 45), (void *)_cffi_d_BSSL_X509V3_extensions_print },
   { "BSSL_X509_NAME_oneline", (void *)_cffi_f_BSSL_X509_NAME_oneline, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 37), (void *)_cffi_d_BSSL_X509_NAME_oneline },
   { "BSSL_X509_get_ext", (void *)_cffi_f_BSSL_X509_get_ext, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 27), (void *)_cffi_d_BSSL_X509_get_ext },
-  { "BSSL_X509_get_ext_d2i", (void *)_cffi_f_BSSL_X509_get_ext_d2i, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 115), (void *)_cffi_d_BSSL_X509_get_ext_d2i },
+  { "BSSL_X509_get_ext_d2i", (void *)_cffi_f_BSSL_X509_get_ext_d2i, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 124), (void *)_cffi_d_BSSL_X509_get_ext_d2i },
   { "BSSL_X509_get_issuer_name", (void *)_cffi_f_BSSL_X509_get_issuer_name, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 31), (void *)_cffi_d_BSSL_X509_get_issuer_name },
   { "BSSL_X509_get_subject_name", (void *)_cffi_f_BSSL_X509_get_subject_name, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 31), (void *)_cffi_d_BSSL_X509_get_subject_name },
   { "BrotliDecoderDecompress", (void *)_cffi_f_BrotliDecoderDecompress, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 6), (void *)_cffi_d_BrotliDecoderDecompress },
-  { "BrotliDefaultAllocFunc", (void *)_cffi_f_BrotliDefaultAllocFunc, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 121), (void *)_cffi_d_BrotliDefaultAllocFunc },
-  { "BrotliSharedDictionaryDestroyInstance", (void *)_cffi_f_BrotliSharedDictionaryDestroyInstance, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 125), (void *)_cffi_d_BrotliSharedDictionaryDestroyInstance },
-  { "BrotliTransformDictionaryWord", (void *)_cffi_f_BrotliTransformDictionaryWord, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 105), (void *)_cffi_d_BrotliTransformDictionaryWord },
-  { "SSL_pending", (void *)_cffi_f_SSL_pending, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 73), (void *)_cffi_d_SSL_pending },
-  { "SetCompression", (void *)_cffi_f_SetCompression, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 80), (void *)_cffi_d_SetCompression },
-  { "_kBrotliContextLookupTable", (void *)_cffi_var__kBrotliContextLookupTable, _CFFI_OP(_CFFI_OP_GLOBAL_VAR_F, 177), (void *)0 },
-  { "_kBrotliPrefixCodeRanges", (void *)_cffi_var__kBrotliPrefixCodeRanges, _CFFI_OP(_CFFI_OP_GLOBAL_VAR_F, 158), (void *)0 },
-  { "free", (void *)_cffi_f_free, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 148), (void *)_cffi_d_free },
+  { "BrotliDefaultAllocFunc", (void *)_cffi_f_BrotliDefaultAllocFunc, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 130), (void *)_cffi_d_BrotliDefaultAllocFunc },
+  { "BrotliSharedDictionaryDestroyInstance", (void *)_cffi_f_BrotliSharedDictionaryDestroyInstance, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 134), (void *)_cffi_d_BrotliSharedDictionaryDestroyInstance },
+  { "BrotliTransformDictionaryWord", (void *)_cffi_f_BrotliTransformDictionaryWord, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 108), (void *)_cffi_d_BrotliTransformDictionaryWord },
+  { "SetCompression", (void *)_cffi_f_SetCompression, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 83), (void *)_cffi_d_SetCompression },
+  { "_kBrotliContextLookupTable", (void *)_cffi_var__kBrotliContextLookupTable, _CFFI_OP(_CFFI_OP_GLOBAL_VAR_F, 187), (void *)0 },
+  { "_kBrotliPrefixCodeRanges", (void *)_cffi_var__kBrotliPrefixCodeRanges, _CFFI_OP(_CFFI_OP_GLOBAL_VAR_F, 167), (void *)0 },
+  { "free", (void *)_cffi_f_free, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 157), (void *)_cffi_d_free },
   { "get_alt_names", (void *)_cffi_f_get_alt_names, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_O, 34), (void *)_cffi_d_get_alt_names },
-  { "test_add_int", (void *)_cffi_f_test_add_int, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 101), (void *)_cffi_d_test_add_int },
+  { "test_add_int", (void *)_cffi_f_test_add_int, _CFFI_OP(_CFFI_OP_CPYTHON_BLTN_V, 104), (void *)_cffi_d_test_add_int },
 };
 
 static const struct _cffi_field_s _cffi_fields[] = {
   { "offset", offsetof(BrotliPrefixCodeRange, offset),
               sizeof(((BrotliPrefixCodeRange *)0)->offset),
-              _CFFI_OP(_CFFI_OP_NOOP, 94) },
+              _CFFI_OP(_CFFI_OP_NOOP, 97) },
   { "nbits", offsetof(BrotliPrefixCodeRange, nbits),
              sizeof(((BrotliPrefixCodeRange *)0)->nbits),
-             _CFFI_OP(_CFFI_OP_NOOP, 176) },
+             _CFFI_OP(_CFFI_OP_NOOP, 186) },
 };
 
 static const struct _cffi_struct_union_s _cffi_struct_unions[] = {
-  { "$BIO", 151, _CFFI_F_OPAQUE,
+  { "$BIO", 160, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$BIO_METHOD", 153, _CFFI_F_OPAQUE,
+  { "$BIO_METHOD", 162, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$BrotliPrefixCodeRange", 157, _CFFI_F_CHECK_FIELDS,
+  { "$BrotliPrefixCodeRange", 166, _CFFI_F_CHECK_FIELDS,
     sizeof(BrotliPrefixCodeRange), offsetof(struct _cffi_align_typedef_BrotliPrefixCodeRange, y), 0, 2 },
-  { "$BrotliSharedDictionary", 160, _CFFI_F_OPAQUE,
+  { "$BrotliSharedDictionary", 169, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$BrotliTransforms", 161, _CFFI_F_OPAQUE,
+  { "$BrotliTransforms", 170, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$CRYPTO_BUFFER", 163, _CFFI_F_OPAQUE,
+  { "$CRYPTO_BUFFER", 172, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$SSL", 164, _CFFI_F_OPAQUE,
+  { "$SSL", 173, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$SSL_CTX", 165, _CFFI_F_OPAQUE,
+  { "$SSL_CTX", 174, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$SSL_METHOD", 166, _CFFI_F_OPAQUE,
+  { "$SSL_METHOD", 175, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$X509", 167, _CFFI_F_OPAQUE,
+  { "$X509", 176, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "$X509_NAME", 171, _CFFI_F_OPAQUE,
+  { "$X509_NAME", 180, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "X509_extension_st", 169, _CFFI_F_OPAQUE,
+  { "X509_extension_st", 178, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "asn1_object_st", 154, _CFFI_F_OPAQUE,
+  { "asn1_object_st", 163, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "asn1_string_st", 155, _CFFI_F_OPAQUE,
+  { "asn1_string_st", 164, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "stack_st_X509", 174, _CFFI_F_OPAQUE,
+  { "stack_st_X509", 183, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
-  { "stack_st_X509_EXTENSION", 175, _CFFI_F_OPAQUE,
+  { "stack_st_X509_EXTENSION", 184, _CFFI_F_OPAQUE,
     (size_t)-1, -1, -1, 0 /* opaque */ },
 };
 
 static const struct _cffi_enum_s _cffi_enums[] = {
-  { "$BrotliDecoderResult", 156, _cffi_prim_int(sizeof(BrotliDecoderResult), ((BrotliDecoderResult)-1) <= 0),
+  { "$BrotliDecoderResult", 165, _cffi_prim_int(sizeof(BrotliDecoderResult), ((BrotliDecoderResult)-1) <= 0),
     "BROTLI_DECODER_RESULT_ERROR,BROTLI_DECODER_RESULT_SUCCESS,BROTLI_DECODER_RESULT_NEEDS_MORE_INPUT,BROTLI_DECODER_RESULT_NEEDS_MORE_OUTPUT" },
 };
 
 static const struct _cffi_typename_s _cffi_typenames[] = {
-  { "BIO", 151 },
-  { "BIO_METHOD", 153 },
-  { "BSSL_ASN1_OBJECT", 154 },
-  { "BSSL_ASN1_OCTET_STRING", 155 },
-  { "BrotliDecoderResult", 156 },
-  { "BrotliPrefixCodeRange", 157 },
-  { "BrotliSharedDictionary", 160 },
-  { "BrotliTransforms", 161 },
-  { "CRYPTO_BUFFER", 163 },
-  { "SSL", 164 },
-  { "SSL_CTX", 165 },
-  { "SSL_METHOD", 166 },
-  { "X509", 167 },
-  { "X509_EXTENSION", 169 },
-  { "X509_NAME", 171 },
+  { "BIO", 160 },
+  { "BIO_METHOD", 162 },
+  { "BSSL_ASN1_OBJECT", 163 },
+  { "BSSL_ASN1_OCTET_STRING", 164 },
+  { "BrotliDecoderResult", 165 },
+  { "BrotliPrefixCodeRange", 166 },
+  { "BrotliSharedDictionary", 169 },
+  { "BrotliTransforms", 170 },
+  { "CRYPTO_BUFFER", 172 },
+  { "SSL", 173 },
+  { "SSL_CTX", 174 },
+  { "SSL_METHOD", 175 },
+  { "X509", 176 },
+  { "X509_EXTENSION", 178 },
+  { "X509_NAME", 180 },
 };
 
 static const struct _cffi_type_context_s _cffi_type_context = {
@@ -2958,12 +3303,12 @@ static const struct _cffi_type_context_s _cffi_type_context = {
   _cffi_struct_unions,
   _cffi_enums,
   _cffi_typenames,
-  49,  /* num_globals */
+  57,  /* num_globals */
   16,  /* num_struct_unions */
   1,  /* num_enums */
   15,  /* num_typenames */
   NULL,  /* no includes */
-  180,  /* num_types */
+  190,  /* num_types */
   0,  /* flags */
 };
 
