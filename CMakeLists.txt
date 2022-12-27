@@ -18,6 +18,10 @@ if (MSVC)
     add_compile_options(/W3)
 endif()
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(CMAKE_MACOSX_RPATH 1)
+endif()
+
 add_subdirectory(boringssl)
 
 add_subdirectory(brotli)
