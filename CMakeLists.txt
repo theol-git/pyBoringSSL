@@ -23,7 +23,10 @@ add_subdirectory(boringssl)
 add_subdirectory(brotli)
 
 add_subdirectory(cert_decompress)
+add_dependencies(cert_decompress ssl)
 
 add_subdirectory(getpeercert)
+add_dependencies(getpeercert ssl)
 
 add_subdirectory(cffi_boringssl)
+add_dependencies(cffi_boringssl ssl)

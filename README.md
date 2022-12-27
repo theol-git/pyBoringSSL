@@ -16,6 +16,8 @@
 * golang (download and install)  
 * perl (strawberry-perl is good)  
 
+ ### Linux
+  `sudo apt-get install -y libunwind-dev`
 
 ## Steps to build and install:  
     python setup.py build install
@@ -35,4 +37,7 @@
   
   ### Linux:
     build/lib.linux-x86_64-$version/boringssl.abi3.so
+  
+## To reduce the lib size:
+  `strip boringssl.*` in linux/mac/android
   
