@@ -9,13 +9,6 @@
     pkg install git python build-essential golang  
     pip install cffi   
     
-  ## Windows 7(x64):
-    conda 3.7-4.8.2 x86_64
-    Windows6.1-KB3004394-v2-x64, for update root certificates.
-    Virtual Studio (2015 Professional with update 3)
-    golang (download and install)
-    perl (strawberry-perl is good)
-    CMake
 
   ### Windows:
 * Python 3.10 ( or other version you want to build for)    
@@ -23,10 +16,6 @@
 * golang (download and install)  
 * perl (strawberry-perl is good)  
 
-  Linux: 
-    Python 3.10, (use conda to install)
-    apt-get install build-essential 
-    golang
 
 ## Steps to build and install:  
     python setup.py build install
