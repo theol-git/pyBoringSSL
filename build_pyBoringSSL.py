@@ -10,8 +10,8 @@ root = os.path.dirname(os.path.abspath(__file__))
 ffibuilder = FFI()
 
 libraries = [
-        "brotlicommon",
-        "brotlidec",
+        "brotlicommon-static",
+        "brotlidec-static",
 
         'bssl',
         'bcrypto',
