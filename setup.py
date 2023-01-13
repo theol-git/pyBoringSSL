@@ -64,6 +64,8 @@ def extend_build(package_name):
                 if platform.architecture()[0] == "32bit":
                     if sys.platform == "win32":
                         cmd += ["-A", "Win32"]
+                    elif "armv7" in platform.platform():
+                        pass
                     else:
                         cmd += ["-DCMAKE_GENERATOR_PLATFORM=x86", ]
 
